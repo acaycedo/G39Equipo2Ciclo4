@@ -9,7 +9,7 @@ import { ProductosComponent } from './productos.component';
 export class FileUploadService {
 
   // API url
-  baseApiUrl = "http://localhost:8080/api/usuarios";
+  baseApiUrl = "http://localhost:8080/api/productos";
 
   //inicializando objeto http
   constructor(private http: HttpClient) { }
@@ -25,19 +25,23 @@ export class FileUploadService {
       reader.onloadend = (e) => {
 
         let lines = reader.result as string;
-
         let separados = lines.split("\n");
 
         for (let lineaactual of separados) {
-          lineaactual.replace(";", ",");
-          let columnas = lineaactual.split(",", 4);
+          /* lineaactual.replace(";", ","); */
+          let columnas = lineaactual.split(";", 7);
+          if (columnas[3] === "nombreproducto") {
+            continue;
+          }
           this.http.post(
             this.baseApiUrl,
             {
-              email: columnas[3],
-              nombre_completo: columnas[2],
-              password: columnas[1],
-              username: columnas[0]
+              precioventa: columnas[5],
+              preciocompra: columnas[4],
+              nombreproducto: columnas[3],
+              nitproveedor: columnas[2],
+              ivacompra: columnas[1],
+              codigoproducto: columnas[0]
             },
             { observe: 'response' }).subscribe(
               (response: any) => {
@@ -47,7 +51,7 @@ export class FileUploadService {
               }
             );
         }
-        //console.log(this.resultados);
+        console.log(this.resultados);
         resolve(this.resultados);
       };
       reader.readAsText(file);

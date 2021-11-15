@@ -3,26 +3,27 @@ package com.grupo39.misiontic2022.ciclo4.Abdidas39.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "usuarios")
+@Document(collection = "productos")
 public class Producto {
 
 	@Id
 	private String id;
 
-	private Long codigoproducto;
-	private Double ivacompra;
-	private Long nitproveedor;
+	private String codigoproducto;
+	private String ivacompra;
+	private String nitproveedor;
 	private String nombreproducto;
-	private Double preciocompra;
-	private Double precioventa;
+	private String preciocompra;
+	private String precioventa;
 
 	public Producto() {
 
 	}
 
-	public Producto(Long codigoproducto, Double ivacompra, Long nitproveedor, String nombreproducto,
-			Double preciocompra, Double precioventa) {
+	public Producto(String id, String codigoproducto, String ivacompra, String nitproveedor, String nombreproducto,
+			String preciocompra, String precioventa) {
 		super();
+		this.id = id;
 		this.codigoproducto = codigoproducto;
 		this.ivacompra = ivacompra;
 		this.nitproveedor = nitproveedor;
@@ -39,27 +40,27 @@ public class Producto {
 		this.id = id;
 	}
 
-	public Long getCodigoproducto() {
+	public String getCodigoproducto() {
 		return codigoproducto;
 	}
 
-	public void setCodigoproducto(Long codigoproducto) {
+	public void setCodigoproducto(String codigoproducto) {
 		this.codigoproducto = codigoproducto;
 	}
 
-	public Double getIvacompra() {
+	public String getIvacompra() {
 		return ivacompra;
 	}
 
-	public void setIvacompra(Double ivacompra) {
+	public void setIvacompra(String ivacompra) {
 		this.ivacompra = ivacompra;
 	}
 
-	public Long getNitproveedor() {
+	public String getNitproveedor() {
 		return nitproveedor;
 	}
 
-	public void setNitproveedor(Long nitproveedor) {
+	public void setNitproveedor(String nitproveedor) {
 		this.nitproveedor = nitproveedor;
 	}
 
@@ -71,20 +72,21 @@ public class Producto {
 		this.nombreproducto = nombreproducto;
 	}
 
-	public Double getPreciocompra() {
+	public String getPreciocompra() {
 		return preciocompra;
 	}
 
-	public void setPreciocompra(Double preciocompra) {
+	public void setPreciocompra(String preciocompra) {
 		this.preciocompra = preciocompra;
 	}
 
-	public Double getPrecioventa() {
+	public String getPrecioventa() {
 		return precioventa;
 	}
 
-	public void setPrecioventa(Double precioventa) {
+	public void setPrecioventa(String precioventa) {
 		this.precioventa = precioventa;
 	}
+
 
 }

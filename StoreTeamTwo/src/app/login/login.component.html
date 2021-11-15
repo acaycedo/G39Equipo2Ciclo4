@@ -15,6 +15,9 @@
 			<a href="#">¿Olvido su contraseña?</a>
 			<button (click)="comparar()">Iniciar</button>
             <br>
+				<div *ngIf="correcto==2"  class="alert alert-warning" role="alert">
+                Asegurese de haber llenado ambos campos.
+                </div>
                 <div *ngIf="correcto==1"  class="alert alert-success" role="alert">
                 Acceso Correcto.
                 </div>

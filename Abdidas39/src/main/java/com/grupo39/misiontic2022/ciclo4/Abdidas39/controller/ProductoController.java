@@ -51,6 +51,7 @@ public class ProductoController {
 		}
 
 	}
+	
 
 	@GetMapping("/productos/{id}")
 	public ResponseEntity<Producto> getProductoById(@PathVariable("id") String id) {
@@ -67,7 +68,7 @@ public class ProductoController {
 	public ResponseEntity<Producto> createProducto(@RequestBody Producto product) {
 		try {
 			Producto _producto = productoRepository.save(
-					new Producto(product.getCodigoproducto(), product.getIvacompra(), product.getNitproveedor(), product.getNombreproducto(),
+					new Producto(null, product.getCodigoproducto(), product.getIvacompra(), product.getNitproveedor(), product.getNombreproducto(),
 							product.getPreciocompra(), product.getPrecioventa()));
 			return new ResponseEntity<>(_producto, HttpStatus.CREATED);
 		} catch (Exception e) {
@@ -105,7 +106,7 @@ public class ProductoController {
 	}
 
 	@DeleteMapping("/productos")
-	public ResponseEntity<HttpStatus> deleteAllProductoss() {
+	public ResponseEntity<HttpStatus> deleteAllProductos() {
 		try {
 			productoRepository.deleteAll();
 			return new ResponseEntity<>(HttpStatus.OK);
@@ -114,10 +115,10 @@ public class ProductoController {
 		}
 	}
 
-	@GetMapping("/productos/{username}")
-	public ResponseEntity<List<Producto>> findByUsername(@PathVariable("username") String nombre) {
+	@GetMapping("/productos/{nombreproducto}")
+	public ResponseEntity<List<Producto>> findByUsername(@PathVariable("nombreproducto") String nombreproducto) {
 		try {
-			List<Producto> productos = productoRepository.findByNombreproducto(nombre);
+			List<Producto> productos = productoRepository.findByNombreproducto(nombreproducto);
 
 			if (productos.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);

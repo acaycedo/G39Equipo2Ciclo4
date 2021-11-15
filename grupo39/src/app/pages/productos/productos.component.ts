@@ -5,6 +5,10 @@ import { catchError } from 'rxjs/operators';
 import { FileUploadService } from './file-upload.service';
 
 
+
+// import { CSVManager, Options, DataSet, DataModel, Value } from './CSVManager';
+
+
 @Component({
   selector: 'app-productos',
   templateUrl: './productos.component.html',
@@ -24,8 +28,11 @@ export class ProductosComponent implements OnInit {
   res: any;
   //variable contenedora de contenidos
   contenido: any;
+  csv:any;
   //url api get
-  urlapiGET: string = "http://universities.hipolabs.com/search?name=middle";
+  /* urlapiGET: string = "http://universities.hipolabs.com/search?name=middle"; */
+  urlapiGET: string = "http://localhost:8080/api/productos";
+  urlapiDELETE: string = "http://localhost:8080/api/productos";
 
   //FUNCIÓN DE CONTROL DE ERRORES
   handleError(error: HttpErrorResponse) {
@@ -42,7 +49,7 @@ export class ProductosComponent implements OnInit {
     return throwError(errorMessage);
   }
 
-  //aliminando objeto revisor de cambios de la tabla
+  //eliminando objeto revisor de cambios de la tabla
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }
@@ -53,6 +60,22 @@ export class ProductosComponent implements OnInit {
 
   ///////////////// METODOS ANGULAR /////////////////////////////
 
+  delete_prod(): void{
+    this.res = this.objetohttp.delete(this.urlapiDELETE).pipe(catchError(this.handleError));
+
+    //suscribe el archivo json y lo convierte   
+    this.res.subscribe((datos: any[]) => {
+      this.contenido = datos;     
+      
+      console.log(this.contenido);
+      this.dtTrigger.next(this.dtOptions);
+    });
+
+    window.location.reload();
+
+    
+  }
+
   //FUNCIÓN DE EJECUCIÓN ANTES DE LA CARGA DE LA PAGINA
   ngOnInit(): void {
     //utilizando el servicio en la url
@@ -60,20 +83,31 @@ export class ProductosComponent implements OnInit {
 
     //suscribe el archivo json y lo convierte   
     this.res.subscribe((datos: any[]) => {
-      this.contenido = datos;
+      this.contenido = datos;     
+      
       console.log(this.contenido);
       this.dtTrigger.next(this.dtOptions);
     });
+
+    
 
     //Opciones especiales de la tabla, localización y caracteristicas
     this.dtOptions = {
       pagingType: 'full_numbers',
       columns: [{
-        title: 'Code',
+        title: 'id',
       }, {
-        title: 'Nombre',
+        title: 'codigoproducto',
       }, {
-        title: 'Pais',
+        title: 'ivacompra',
+      }, {
+        title: 'nitproveedor',
+      }, {
+        title: 'nombreproducto',
+      }, {
+        title: 'preciocompra',
+      }, {
+        title: 'precioventa',
       }],
       pageLength: 10,
       responsive: true,
@@ -109,22 +143,32 @@ export class ProductosComponent implements OnInit {
   //lista que almacenara los resultados de la insercion de cada linea
   resultados: any;
 
+  
   // Variable to store shortLink from api response
   file!: File; //variable para almacenar los datos
 
-  //variable de confimación de recepcion de archivo
+  //variable de confirmación de recepcion de archivo
   recibido: boolean = false;
 
+
+  
   // En caso de seleccionar archivo, escojer el primer archivo
   onChange(event: any) {
     this.file = event.target.files[0];
+    
   }
+
+  
 
   // Cuandop haga click, iniciar proceso de envio
   async onUpload() {
     console.log(this.file);
     this.resultados = await this.fileUploadService.upload(this.file);
     console.log(this.resultados);
-  }
+    console.log(this.file.name);
+    console.log(this.file.size);
+    console.log(this.file.type);
 
+    window.location.reload();
+  }
 }
