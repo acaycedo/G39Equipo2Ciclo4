@@ -1,0 +1,54 @@
+<app-navbar></app-navbar>
+<br>
+<br>
+<div class="container" id="container">
+    
+    <!--Login Iniciar sesion-->
+	<div class="form-container sign-in-container">
+		<div class="form" action="#">
+			<h1>Inicia Sesión</h1>
+			<div class="social-container">
+				<a href="https://discord.gg/U6QUyTYuyn" class="social" target="_blank"><i class="fab fa-discord"></i></a>
+				<a href="https://github.com/acaycedo/G39Equipo2Ciclo4" class="social" target="_blank"><i class="fab fa-google-plus-g"></i></a>
+				<a href="https://github.com/acaycedo/G39Equipo2Ciclo4" class="social" target="_blank"><i class="fab fa-github-square"></i></a>
+			</div>
+			<input type="text" placeholder="Usuario" [(ngModel)]="user" />
+			<input type="password" placeholder="Contraseña" [(ngModel)]="pass"/>
+			<a href="#">¿Olvido su contraseña?</a>
+			<button (click)="comparar()" (click)="redirigir()">Iniciar</button>
+            <br>
+                <div *ngIf="correcto==1"  class="alert alert-success" role="alert" >
+                Acceso Correcto.
+                </div>
+                <div *ngIf="correcto==0"  class="alert alert-danger" role="alert">
+                Usuario o Contraseña incorrecto.
+				<div class="spinner-border text-danger" role="status">
+					<span class="visually-hidden">Loading...</span>
+				  </div>
+                </div>
+				<div *ngIf="correcto==2"  class="alert alert-warning" role="alert">
+					Ingrese usuario y contraseña!	
+				</div>
+            </div>
+	</div>
+
+    <!--Hasta aca-->
+	<div class="overlay-container">
+		<div class="overlay">
+            <!--Msj de al lado-->
+			<div class="overlay-panel overlay-right">
+				<h1>¡Hola de nuevo!</h1>
+				<p>Bienvenido a Store Team Two</p>
+                <!--Boton de quienes somos-->
+				<button class="ghost" id="signUp" (click)="navegarHaciaDash()">Quienes Somos</button>
+			</div>
+			
+		  
+		</div>
+	</div>
+	
+</div>
+
+
+<br>
+<br>
