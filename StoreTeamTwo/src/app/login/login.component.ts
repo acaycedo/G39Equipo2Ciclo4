@@ -21,7 +21,10 @@ export class LoginComponent implements OnInit {
 
   correcto:number=-1;
   comparar(){
-    if (this.user===this.user_correct){
+
+    if (this.user==""||this.pass==""){
+      this.correcto = 2;
+    }else if(this.user===this.user_correct){
       this.correcto = 1;
       if (this.pass===this.pass_correct) {
         this.correcto=1;
