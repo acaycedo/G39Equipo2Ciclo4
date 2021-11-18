@@ -28,6 +28,7 @@
               Cargar
             </button>
             <button class="btn btn-primary" (click)="refresh()" type="button"> Recargar</button>
+            <button class="btn btn-danger" (click)="delete_prod()" type="button"> Borrar BD</button>
           </div>
           <div class="col col-lg-2">
             {{recibido}}
@@ -37,19 +38,35 @@
       </div>
         <div class="col-md-auto">
           <h3 *ngFor="let dato of resultados; let i = index">
-            Dato {{i}} obtuvo codigo {{dato[0]}}
+            Dato {{i}} obtuvo codigo {{dato[0]}} 
           </h3>
+
         </div>
         <br>
       <h2>Tabla Productos</h2>
       <div class="table-responsive">
-        <table class="compact nowrap table table-dark table-hover" datatable [dtOptions]="dtOptions"
+        <table class="compact nowrap table table-dark table-hover table-striped" datatable [dtOptions]="dtOptions"
           [dtTrigger]="dtTrigger">
+          <thead>
+            <tr>
+              <th>Id BD</th>
+              <th>Código</th>
+              <th>Nombre Producto</th>
+              <th>Nit Proveedor</th>
+              <th>Percio Compra</th>
+              <th>IVA</th>
+              <th>Precio Venta</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr *ngFor="let universidad of contenido" class="">
-              <td>{{universidad.alpha_two_code}}</td>
-              <td>{{universidad.name}}</td>
-              <td>{{universidad.country}}</td>
+            <tr *ngFor="let producto of contenido" class="">
+              <td>{{producto.id}}</td>
+              <td>{{producto.codigoproducto}}</td>
+              <td>{{producto.nombreproducto}}</td>
+              <td>{{producto.nitproveedor}}</td>              
+              <td>{{producto.preciocompra}}</td>
+              <td>{{producto.ivacompra}}</td>
+              <td>{{producto.precioventa}}</td>
             </tr>
           </tbody>
         </table>
