@@ -1,8 +1,9 @@
+
 <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
   <div class="position-sticky pt-3">
     <ul class="nav flex-column">
       <li class="nav-item">
-        <a class="nav-link" aria-current="page" href="#">
+        <a class="nav-link" aria-current="page" [routerLink]="'login'">
           <span data-feather="home"></span>
           Home Page
         </a>
@@ -10,12 +11,12 @@
       <li class="nav-item">
         <a class="nav-link active" href="/productos">
           <span data-feather="shopping-cart"></span>
+
           Productos
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="users"></span>
+        <a class="nav-link" [routerLink]="'clientes'">
           Clientes
         </a>
       </li>
@@ -53,9 +54,9 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" [routerLink]="'login'">
           <span data-feather="file-text"></span>
-          Certificados
+          Cerrar Sesión
         </a>
       </li>
     </ul>

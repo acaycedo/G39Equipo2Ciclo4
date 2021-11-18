@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
       this.correcto = 1;
       if (this.pass===this.pass_correct) {
         this.correcto=1;
+        this.router.navigate(['/productos'])
 
       }else{
         this.correcto=0;
@@ -43,11 +44,11 @@ export class LoginComponent implements OnInit {
       this.correcto=2
     }
   }
-  redirigir(){
-    if(this.user===this.user_correct && this.pass===this.pass_correct){
+  /* redirigir(){
+        if(this.user===this.user_correct && this.pass===this.pass_correct){
       this.router.navigate(['/productos'])
-    }
-  }
+    } 
+  } */
   navegarHaciaDash(){
     this.router.navigate(['/dasboard'])
    }
