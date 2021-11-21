@@ -18,9 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.grupo39.misiontic2022.ciclo4.Abdidas39.model.Producto;
+import com.grupo39.misiontic2022.ciclo4.Abdidas39.model.Cliente;
 import com.grupo39.misiontic2022.ciclo4.Abdidas39.repository.ClienteRepository;
-import com.grupo39.misiontic2022.ciclo4.Abdidas39.repository.ProductoRepository;
 
 @CrossOrigin(origins = "*")
 //@CrossOrigin(origins = "http://localhost:8081")
@@ -32,11 +31,11 @@ public class ClienteController {
 	ClienteRepository clienteRepository;
 
 	@GetMapping("/clientes")
-	public ResponseEntity<List<Cliente>> getAllClientes(@RequestParam(required = false) String nombreproducto) {
+	public ResponseEntity<List<Cliente>> getAllClientes(@RequestParam(required = false) String cedulacliente) {
 		try {
 			List<Cliente> clientes = new ArrayList<Cliente>();
 
-			if (nombrecliente == null) {
+			if (cedulacliente == null) {
 				clienteRepository.findAll().forEach(clientes::add);
 			} else {
 				clienteRepository.findByCedulacliente(cedulacliente).forEach(clientes::add);
@@ -52,7 +51,6 @@ public class ClienteController {
 		}
 
 	}
-	
 
 	@GetMapping("/clientes/{id}")
 	public ResponseEntity<Cliente> getClienteById(@PathVariable("id") String id) {
@@ -68,9 +66,7 @@ public class ClienteController {
 	@PostMapping("/clientes")
 	public ResponseEntity<Cliente> createCliente(@RequestBody Cliente client) {
 		try {
-			Cliente _cliente = clienteRepository.save(new Cliente(client.getCedulacliente(), 
-					client.getNombrecompleto(), client.getDireccion(), client.getTelefono(), 
-					client.getCorreo()));
+			Cliente _cliente = clienteRepository.save(new Cliente(client.getCedulacliente(),client.getNombrecompleto(),client.getDireccion(),client.getTelefono(),client.getCorreo(),null));
 			return new ResponseEntity<>(_cliente, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -78,17 +74,17 @@ public class ClienteController {
 	}
 
 	@PutMapping("/clientes/{id}")
-	public ResponseEntity<CLiente> updateCliente(@PathVariable("id") String id, @RequestBody CLiente client) {
+	public ResponseEntity<Cliente> updateCliente(@PathVariable("id") String id, @RequestBody Cliente client) {
 		Optional<Cliente> clienteData = clienteRepository.findById(id);
 
 		if (clienteData.isPresent()) {
-			CLiente _cliente = clienteData.get();
+			Cliente _cliente = clienteData.get();
 			_cliente.setCedulacliente(client.getCedulacliente());
 			_cliente.setNombrecompleto(client.getNombrecompleto());
 			_cliente.setDireccion(client.getDireccion());
 			_cliente.setTelefono(client.getTelefono());
 			_cliente.setCorreo(client.getCorreo());
-			
+
 			return new ResponseEntity<>(clienteRepository.save(_cliente), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -116,7 +112,7 @@ public class ClienteController {
 	}
 
 	@GetMapping("/clientes/{cedulacliente}")
-	public ResponseEntity<List<Producto>> findByCedulacliente(@PathVariable("cedulacliente") String cedulacliente) {
+	public ResponseEntity<List<Cliente>> findByCedulacliente(@PathVariable("cedulacliente") String cedulacliente) {
 		try {
 			List<Cliente> clientes = clienteRepository.findByCedulacliente(cedulacliente);
 
