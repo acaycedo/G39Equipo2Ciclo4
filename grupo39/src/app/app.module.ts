@@ -13,6 +13,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ClientesComponent } from './pages/clientes/clientes.component';
+import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { ClientesComponent } from './pages/clientes/clientes.component';
     LoginComponent,
     DashboardComponent,
     ClientesComponent,
+    UsuariosComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,12 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { Subject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
+
 @Component({
-  selector: 'app-clientes',
-  templateUrl: './clientes.component.html',
-  styleUrls: ['./clientes.component.css']
+  selector: 'app-usuarios',
+  templateUrl: './usuarios.component.html',
+  styleUrls: ['./usuarios.component.css']
 })
-export class ClientesComponent implements OnInit {
+export class UsuariosComponent implements OnInit {
 
   //Función constructora
   constructor(private objetohttp: HttpClient) { }
@@ -22,11 +23,11 @@ export class ClientesComponent implements OnInit {
   res: any;
   //variable contenedora de contenidos
   contenido: any;
-  csv:any;
+  csv: any;
   //url api get
   /* urlapiGET: string = "http://universities.hipolabs.com/search?name=middle"; */
-  urlapiGET: string = "http://localhost:8080/api/clientes";
-  
+  urlapiGET: string = "http://localhost:8080/api/usuarios";
+
   //FUNCIÓN DE CONTROL DE ERRORES
   handleError(error: HttpErrorResponse) {
     let errorMessage = 'Error desconocido!';
@@ -37,7 +38,7 @@ export class ClientesComponent implements OnInit {
       // Errores del lado del servidor
       errorMessage = `Codigo de Error: ${error.status} \nMensaje: ${error.message}`;
     }
-  //MOSTRANDO UN ERROR EN UNA ALERTA
+    //MOSTRANDO UN ERROR EN UNA ALERTA
     //window.alert(errorMessage);
     return throwError(errorMessage);
   }
@@ -47,7 +48,7 @@ export class ClientesComponent implements OnInit {
     this.dtTrigger.unsubscribe();
   }
   refresh(): void { window.location.reload(); }
- 
+
 
   ngOnInit(): void {
     //utilizando el servicio en la url
@@ -55,13 +56,13 @@ export class ClientesComponent implements OnInit {
 
     //suscribe el archivo json y lo convierte   
     this.res.subscribe((datos: any[]) => {
-      this.contenido = datos;     
-      
+      this.contenido = datos;
+
       console.log(this.contenido);
       this.dtTrigger.next(this.dtOptions);
     });
 
-    
+
 
     //Opciones especiales de la tabla, localización y caracteristicas
     this.dtOptions = {
@@ -69,15 +70,13 @@ export class ClientesComponent implements OnInit {
       columns: [{
         title: 'id',
       }, {
-        title: 'cedulacliente',
+        title: 'username',
+      }, {
+        title: 'password',
       }, {
         title: 'nombrecompleto',
       }, {
-        title: 'direccion',
-      }, {
-        title: 'telefono',
-      }, {
-        title: 'correo',
+        title: 'email',
       }],
       pageLength: 10,
       responsive: true,
