@@ -22,11 +22,11 @@ export class ClientesComponent implements OnInit {
   res: any;
   //variable contenedora de contenidos
   contenido: any;
-  csv:any;
+  csv: any;
   //url api get
   /* urlapiGET: string = "http://universities.hipolabs.com/search?name=middle"; */
   urlapiGET: string = "http://localhost:8080/api/clientes";
-  
+
   //FUNCIÓN DE CONTROL DE ERRORES
   handleError(error: HttpErrorResponse) {
     let errorMessage = 'Error desconocido!';
@@ -37,7 +37,7 @@ export class ClientesComponent implements OnInit {
       // Errores del lado del servidor
       errorMessage = `Codigo de Error: ${error.status} \nMensaje: ${error.message}`;
     }
-  //MOSTRANDO UN ERROR EN UNA ALERTA
+    //MOSTRANDO UN ERROR EN UNA ALERTA
     //window.alert(errorMessage);
     return throwError(errorMessage);
   }
@@ -47,7 +47,7 @@ export class ClientesComponent implements OnInit {
     this.dtTrigger.unsubscribe();
   }
   refresh(): void { window.location.reload(); }
- 
+
 
   ngOnInit(): void {
     //utilizando el servicio en la url
@@ -55,13 +55,13 @@ export class ClientesComponent implements OnInit {
 
     //suscribe el archivo json y lo convierte   
     this.res.subscribe((datos: any[]) => {
-      this.contenido = datos;     
-      
+      this.contenido = datos;
+
       console.log(this.contenido);
       this.dtTrigger.next(this.dtOptions);
     });
 
-    
+
 
     //Opciones especiales de la tabla, localización y caracteristicas
     this.dtOptions = {
@@ -105,5 +105,36 @@ export class ClientesComponent implements OnInit {
       }
     };
   }
+
+  codigoRespuesta!: number;
+  res2: any;
+  cedulacliente!: string;
+  nombrecompleto!: string;
+  direccion!: string;
+  correo !: string;
+  id!: string;
+  telefono!: string;
+
+
+
+  postData(){
+    this.objetohttp.post<any>("http://localhost:8080/api/clientes",
+      {
+        cedulacliente: this.cedulacliente,
+        correo: this.correo,
+        direccion: this.direccion,
+        nombrecompleto: this.nombrecompleto,
+        telefono: this.telefono
+      },
+      {
+        observe: 'response'
+      }
+    
+    ).subscribe(response=>{
+      this.codigoRespuesta=response.status;
+      this.res2=response;
+    });
+  }
+
 
 }

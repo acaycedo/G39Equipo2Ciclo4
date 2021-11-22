@@ -66,10 +66,12 @@ public class ClienteController {
 	@PostMapping("/clientes")
 	public ResponseEntity<Cliente> createCliente(@RequestBody Cliente client) {
 		try {
-			Cliente _cliente = clienteRepository.save(new Cliente(null,client.getCedulacliente(),client.getNombrecompleto(),client.getDireccion(),client.getTelefono(),client.getCorreo()));
+			Cliente _cliente = clienteRepository.save(new Cliente(null,client.getCedulacliente(),client.getCorreo(),client.getDireccion(),client.getNombrecompleto(),client.getTelefono()));
 			return new ResponseEntity<>(_cliente, HttpStatus.CREATED);
 		} catch (Exception e) {
+			e.printStackTrace();	
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		
 		}
 	}
 

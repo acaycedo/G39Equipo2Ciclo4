@@ -4,7 +4,8 @@
   <div class="row">
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Clientes</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
@@ -16,20 +17,22 @@
             This week
           </button>
         </div>
-        
+
       </div>
       <div class="container">
         <div class="row">
-            <button class="btn btn-success" type="button"> Crear</button>
-            <button class="btn btn-primary" type="button"> Actualizar</button>
-            <button class="btn btn-danger" type="button"> Borrar</button>
-          </div>
-          <div class="col col-lg-2">
-            
-
-          </div>
-        </div>      
-    <br>
+          <input type="text" [(ngModel)]="cedulacliente" placeholder="cedula">
+          <input type="text" [(ngModel)]="correo" placeholder="correo">
+          <input type="text" [(ngModel)]="direccion" placeholder="direccion">
+          <input type="text" [(ngModel)]="nombrecompleto" placeholder="nombrecompleto">
+          <input type="text" [(ngModel)]="telefono" placeholder="telefono">
+          <button (click)="postData">Click</button>
+          <button class="btn btn-success" type="button" > Crear</button>
+          <button class="btn btn-primary" type="button"> Actualizar</button>
+          <button class="btn btn-danger" type="button"> Borrar</button>
+        </div>
+      </div>
+      <br>
       <h2>Tabla Clientes</h2>
       <div class="table-responsive">
         <table class="compact nowrap table table-dark table-hover table-striped" datatable [dtOptions]="dtOptions"
@@ -41,7 +44,7 @@
               <th>Nombre Completo</th>
               <th>Dirección</th>
               <th>Teléfono</th>
-              <th>Correo</th>              
+              <th>Correo</th>
             </tr>
           </thead>
           <tbody>
@@ -49,13 +52,17 @@
               <td>{{cliente.id}}</td>
               <td>{{cliente.cedulacliente}}</td>
               <td>{{cliente.nombrecompleto}}</td>
-              <td>{{cliente.direccion}}</td>              
+              <td>{{cliente.direccion}}</td>
               <td>{{cliente.telefono}}</td>
-              <td>{{cliente.correo}}</td>              
+              <td>{{cliente.correo}}</td>
             </tr>
           </tbody>
         </table>
       </div>
+      <br>
+      <br>
+      <br>
+      <br>
     </main>
   </div>
 </div>
