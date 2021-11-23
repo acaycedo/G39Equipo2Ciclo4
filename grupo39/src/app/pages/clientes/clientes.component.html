@@ -21,15 +21,41 @@
       </div>
       <div class="container">
         <div class="row">
-          <input type="text" [(ngModel)]="cedulacliente" placeholder="cedula">
-          <input type="text" [(ngModel)]="correo" placeholder="correo">
-          <input type="text" [(ngModel)]="direccion" placeholder="direccion">
-          <input type="text" [(ngModel)]="nombrecompleto" placeholder="nombrecompleto">
-          <input type="text" [(ngModel)]="telefono" placeholder="telefono">
-          <button (click)="postData">Click</button>
-          <button class="btn btn-success" type="button" > Crear</button>
-          <button class="btn btn-primary" type="button"> Actualizar</button>
-          <button class="btn btn-danger" type="button"> Borrar</button>
+          <div class="row">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Cédula" aria-label="First name"
+                [(ngModel)]="cedulacliente">
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Correo" aria-label="Last name" [(ngModel)]="correo">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Dirección" aria-label="First name"
+                [(ngModel)]="direccion">
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Nombre Completo" aria-label="Last name"
+                [(ngModel)]="nombrecompleto">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <input type="text" class="form-control" placeholder="Teléfono" aria-label="First name"
+                [(ngModel)]="telefono">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-mg-6">
+              <div class="btn-group">
+                <button class="btn btn-success" type="button" (click)="postData()"> Crear</button>
+                <button class="btn btn-primary" type="button"> Actualizar</button>
+                <button class="btn btn-danger" type="button"> Borrar</button>
+              </div>
+
+            </div>
+          </div>
         </div>
       </div>
       <br>
