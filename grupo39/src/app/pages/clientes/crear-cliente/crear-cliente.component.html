@@ -7,57 +7,69 @@
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Clientes</h1>
+        <h1 class="h2"><button type="button" class="btn btn-outline-primary" [routerLink]="['/clientes']"><i class="fas fa-arrow-left"></i></button> Clientes</h1>
+
         <div class="btn-toolbar mb-2 mb-md-0">
+
           <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary" [routerLink]="['/crear_cliente']">Share</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary" [routerLink]="['/crear_cliente']">Export</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary"
+              [routerLink]="['/crear_cliente']">Share</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary"
+              [routerLink]="['/crear_cliente']">Export</button>
           </div>
           <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
             <span data-feather="calendar"></span>
             This week
           </button>
+
         </div>
 
       </div>
-      <div class="container">
-        <div class="row">
-          <div class="row">
-            <div class="col">
-              <input type="text" class="form-control" placeholder="Cédula" aria-label="First name"
-                [(ngModel)]="cedulacliente">
-            </div>
-            <div class="col">
-              <input type="text" class="form-control" placeholder="Correo" aria-label="Last name" [(ngModel)]="correo">
-            </div>
+      <div class="card">
+        <div class="card-header">
+          <p class="fw-bold fs-5">Creación de clientes</p>
+        </div>
+        <div class="card-body">
+          <p class="fw-normal fs-7">Inserte cada uno de los datos solicitados.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body bg-light">
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="floatingInput" placeholder="cedula"
+              [(ngModel)]="cedulacliente">
+            <label for="floatingInput"> Cédula</label>
           </div>
-          <div class="row">
-            <div class="col">
-              <input type="text" class="form-control" placeholder="Dirección" aria-label="First name" [(ngModel)]="direccion">
-            </div>
-            <div class="col">
-              <input type="text" class="form-control" placeholder="Nombre Completo" aria-label="Last name"
-                [(ngModel)]="nombrecompleto">
-            </div>
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="floatingPassword" placeholder="name@example.com"
+              [(ngModel)]="correo">
+            <label for="floatingPassword"> Email</label>
           </div>
-          <div class="row">
-            <div class="col-6">
-              <input type="text" class="form-control" placeholder="Teléfono" aria-label="First name" [(ngModel)]="telefono">
-            </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Dirección" [(ngModel)]="direccion">
+            <label for="floatingInput"> Dirección</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingPassword" placeholder="Nombre Completo"
+              [(ngModel)]="nombrecompleto">
+            <label for="floatingPassword"> Nombre Completo</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="10 digitos" [(ngModel)]="telefono">
+            <label for="floatingInput"> Teléfono</label>
           </div>
           <div class="row">
             <div class="col-mg-6">
               <div class="btn-group">
-                <button class="btn btn-success" type="button" (click)="postData()" [routerLink]="['/clientes']"> Crear</button>
-                <button class="btn btn-primary" type="button"> Actualizar</button>
-                <button class="btn btn-danger" type="button"> Borrar</button>
+                <button class="btn btn-outline-success btn-lg" type="button" (click)="postData()" [routerLink]="['/clientes']">
+                  Crear</button>
+                <button class="btn btn-primary btn-lg" type="button" (click)="refresh()"> Limpiar</button>
               </div>
-      
+
             </div>
           </div>
         </div>
       </div>
-      <br>
     </main>
   </div>
 </div>

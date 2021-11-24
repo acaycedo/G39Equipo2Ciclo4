@@ -21,45 +21,57 @@
         </div>
 
       </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4"><h1 class="h3">Operaciones→</h1></div>
+      <div class="card">
+        <div class="card-header">
+          <div class="col-lg-4"><h1 class="h3">Operaciones</h1></div>
+        </div>
+        <div class="card-body">
+          Estas son las operaciones disponibles para el modulo clientes.
           <div class="col-md-auto ">
-            <button class="btn btn-success" [routerLink]="['/crear_cliente']"> Crear </button>
-            <button class="btn btn-primary" type="button"> Actualizar </button>
-            <button class="btn btn-danger" type="button"> Borrar </button>
+            <div class="btn-group" role="group" aria-label="Basic example">
+            <button class="btn btn-outline-success" [routerLink]="['/crear_cliente']"> Crear </button>
+            <button class="btn btn-outline-primary" type="button"> Actualizar </button>
+            <button class="btn btn-outline-danger" type="button"> Borrar </button>
           </div>
-          
+          </div>
         </div>
       </div>
 
       <br>
-      <h2>Tabla Clientes</h2>
-      <div class="table-responsive">
-        <table class="compact nowrap table table-dark table-hover table-striped" datatable [dtOptions]="dtOptions"
-          [dtTrigger]="dtTrigger">
-          <thead>
-            <tr>
-              <th>Id BD</th>
-              <th>Cédula</th>
-              <th>Nombre Completo</th>
-              <th>Dirección</th>
-              <th>Teléfono</th>
-              <th>Correo</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let cliente of contenido" class="">
-              <td>{{cliente.id}}</td>
-              <td>{{cliente.cedulacliente}}</td>
-              <td>{{cliente.nombrecompleto}}</td>
-              <td>{{cliente.direccion}}</td>
-              <td>{{cliente.telefono}}</td>
-              <td>{{cliente.correo}}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="card">
+        <div class="card-header">
+          <div class="col-lg-4"><h1 class="h3">Tabla Clientes</h1></div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="compact nowrap table table-dark table-hover table-striped" datatable [dtOptions]="dtOptions"
+              [dtTrigger]="dtTrigger">
+              <thead>
+                <tr>
+                  <th>Id BD</th>
+                  <th>Cédula</th>
+                  <th>Nombre Completo</th>
+                  <th>Dirección</th>
+                  <th>Teléfono</th>
+                  <th>Correo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let cliente of contenido" class="">
+                  <td>{{cliente.id}}</td>
+                  <td>{{cliente.cedulacliente}}</td>
+                  <td>{{cliente.nombrecompleto}}</td>
+                  <td>{{cliente.direccion}}</td>
+                  <td>{{cliente.telefono}}</td>
+                  <td>{{cliente.correo}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
+      
+      
       <br>
       <br>
       <br>

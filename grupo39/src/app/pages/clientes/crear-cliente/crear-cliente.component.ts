@@ -42,5 +42,6 @@ export class CrearClienteComponent implements OnInit {
       this.res2=response;
     });
   }
+  refresh(): void { window.location.reload(); }
 
 }
