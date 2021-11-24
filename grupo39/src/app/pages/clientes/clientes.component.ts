@@ -106,35 +106,7 @@ export class ClientesComponent implements OnInit {
     };
   }
 
-  codigoRespuesta!: number;
-  res2: any;
-  cedulacliente!: string;
-  nombrecompleto!: string;
-  direccion!: string;
-  correo !: string;
-  id!: string;
-  telefono!: string;
-
-
-
-  postData(){
-    this.objetohttp.post<any>("http://localhost:8080/api/clientes",
-      {
-        cedulacliente: this.cedulacliente,
-        correo: this.correo,
-        direccion: this.direccion,
-        nombrecompleto: this.nombrecompleto,
-        telefono: this.telefono
-      },
-      {
-        observe: 'response'
-      }
-    
-    ).subscribe(response=>{
-      this.codigoRespuesta=response.status;
-      this.res2=response;
-    });
-  }
+  
 
 
 }

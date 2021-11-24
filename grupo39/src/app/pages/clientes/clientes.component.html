@@ -9,8 +9,10 @@
         <h1 class="h2">Clientes</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary"
+              [routerLink]="['/crear_cliente']">Share</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary"
+              [routerLink]="['/crear_cliente']">Export</button>
           </div>
           <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
             <span data-feather="calendar"></span>
@@ -21,43 +23,16 @@
       </div>
       <div class="container">
         <div class="row">
-          <div class="row">
-            <div class="col">
-              <input type="text" class="form-control" placeholder="Cédula" aria-label="First name"
-                [(ngModel)]="cedulacliente">
-            </div>
-            <div class="col">
-              <input type="text" class="form-control" placeholder="Correo" aria-label="Last name" [(ngModel)]="correo">
-            </div>
+          <div class="col-lg-4"><h1 class="h3">Operaciones→</h1></div>
+          <div class="col-md-auto ">
+            <button class="btn btn-success" [routerLink]="['/crear_cliente']"> Crear </button>
+            <button class="btn btn-primary" type="button"> Actualizar </button>
+            <button class="btn btn-danger" type="button"> Borrar </button>
           </div>
-          <div class="row">
-            <div class="col">
-              <input type="text" class="form-control" placeholder="Dirección" aria-label="First name"
-                [(ngModel)]="direccion">
-            </div>
-            <div class="col">
-              <input type="text" class="form-control" placeholder="Nombre Completo" aria-label="Last name"
-                [(ngModel)]="nombrecompleto">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6">
-              <input type="text" class="form-control" placeholder="Teléfono" aria-label="First name"
-                [(ngModel)]="telefono">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-mg-6">
-              <div class="btn-group">
-                <button class="btn btn-success" type="button" (click)="postData()"> Crear</button>
-                <button class="btn btn-primary" type="button"> Actualizar</button>
-                <button class="btn btn-danger" type="button"> Borrar</button>
-              </div>
-
-            </div>
-          </div>
+          
         </div>
       </div>
+
       <br>
       <h2>Tabla Clientes</h2>
       <div class="table-responsive">

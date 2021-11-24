@@ -14,6 +14,10 @@ import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ClientesComponent } from './pages/clientes/clientes.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
+import { CrearClienteComponent } from './pages/clientes/crear-cliente/crear-cliente.component';
+import { EliminarClienteComponent } from './pages/clientes/eliminar-cliente/eliminar-cliente.component';
+import { ActualizarClienteComponent } from './pages/clientes/actualizar-cliente/actualizar-cliente.component';
+import { ConsultarClienteComponent } from './pages/clientes/consultar-cliente/consultar-cliente.component';
 
 
 @NgModule({
@@ -27,6 +31,10 @@ import { UsuariosComponent } from './pages/usuarios/usuarios.component';
     DashboardComponent,
     ClientesComponent,
     UsuariosComponent,
+    CrearClienteComponent,
+    EliminarClienteComponent,
+    ActualizarClienteComponent,
+    ConsultarClienteComponent,
   ],
   imports: [
     BrowserModule,
