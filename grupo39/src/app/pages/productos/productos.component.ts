@@ -137,6 +137,8 @@ export class ProductosComponent implements OnInit {
   }
 
   ///////////////// POST /////////////////////////////
+  correcto:number=-1;
+
   codigoRespuesta: number = 0;
   res2: any;
 
@@ -155,9 +157,12 @@ export class ProductosComponent implements OnInit {
   // En caso de seleccionar archivo, escojer el primer archivo
   onChange(event: any) {
     this.file = event.target.files[0];
+    this.recibido=true
+    if (this.recibido=true){
+      this.correcto=1;
+    }
     
   }
-
   
 
   // Cuandop haga click, iniciar proceso de envio
@@ -168,7 +173,8 @@ export class ProductosComponent implements OnInit {
     console.log(this.file.name);
     console.log(this.file.size);
     console.log(this.file.type);
-
+    
+    
     window.location.reload();
   }
 }
