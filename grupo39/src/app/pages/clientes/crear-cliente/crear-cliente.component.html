@@ -37,6 +37,11 @@
         <div class="card-body bg-light">
           <div class="form-floating mb-3">
             <input type="email" class="form-control" id="floatingInput" placeholder="cedula"
+              [(ngModel)]="id">
+            <label for="floatingInput"> ID</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="floatingInput" placeholder="cedula"
               [(ngModel)]="cedulacliente">
             <label for="floatingInput"> Cédula</label>
           </div>
@@ -64,6 +69,7 @@
                 <button class="btn btn-outline-success btn-lg" type="button" (click)="postData()" [routerLink]="['/clientes']">
                   Crear</button>
                 <button class="btn btn-primary btn-lg" type="button" (click)="refresh()"> Limpiar</button>
+                <button class="btn btn-primary btn-lg" type="button" (click)="buscarCliente()"> Buscar</button>
               </div>
 
             </div>

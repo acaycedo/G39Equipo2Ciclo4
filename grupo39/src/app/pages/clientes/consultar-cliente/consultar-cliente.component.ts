@@ -12,4 +12,15 @@ export class ConsultarClienteComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  usersearch!:string;
+  cedulacliente!: string;
+  nombrecompleto!: string;
+  direccion!: string;
+  correo !: string;
+  id!: string;
+  telefono!: string;
+
+
 }
+
+

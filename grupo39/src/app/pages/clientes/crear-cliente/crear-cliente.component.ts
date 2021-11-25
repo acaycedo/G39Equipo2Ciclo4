@@ -13,6 +13,7 @@ export class CrearClienteComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  urlAPI:string="http://localhost:8080/api/clientes";
   codigoRespuesta!: number;
   res2: any;
   cedulacliente!: string;
@@ -21,6 +22,7 @@ export class CrearClienteComponent implements OnInit {
   correo !: string;
   id!: string;
   telefono!: string;
+  contenido!:any;
 
 
 
@@ -42,6 +44,24 @@ export class CrearClienteComponent implements OnInit {
       this.res2=response;
     });
   }
+  buscarCliente(){
+    this.res2=this.objetohttp.get(this.urlAPI+"?id="+this.id);
+    this.res2.subscribe((data:any[])=>{
+      this.contenido=data;
+      console.log(this.contenido);
+      this.cedulacliente=this.contenido[0].cedulacliente
+      this.nombrecompleto=this.contenido[0].nombrecompleto
+      this.direccion=this.contenido[0].direccion
+      this.telefono=this.contenido[0].telefono
+      this.correo=this.contenido[0].correo
+    });
+
+
+
+  }
+
+
+
   refresh(): void { window.location.reload(); }
 
 }

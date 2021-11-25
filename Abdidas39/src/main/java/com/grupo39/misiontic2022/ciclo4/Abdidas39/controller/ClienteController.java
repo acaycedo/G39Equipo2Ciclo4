@@ -52,16 +52,7 @@ public class ClienteController {
 
 	}
 
-	@GetMapping("/clientes/{id}")
-	public ResponseEntity<Cliente> getClienteById(@PathVariable("id") String id) {
-		Optional<Cliente> clienteData = clienteRepository.findById(id);
-
-		if (clienteData.isPresent()) {
-			return new ResponseEntity<>(clienteData.get(), HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
+	
 
 	@PostMapping("/clientes")
 	public ResponseEntity<Cliente> createCliente(@RequestBody Cliente client) {
@@ -113,18 +104,16 @@ public class ClienteController {
 		}
 	}
 
-	@GetMapping("/clientes/{cedulacliente}")
-	public ResponseEntity<List<Cliente>> findByCedulacliente(@PathVariable("cedulacliente") String cedulacliente) {
-		try {
-			List<Cliente> clientes = clienteRepository.findByCedulacliente(cedulacliente);
 
-			if (clientes.isEmpty()) {
-				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-			}
-			return new ResponseEntity<>(clientes, HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
+	@GetMapping("/cliente/{id}")
+	  public ResponseEntity<Cliente> getClientesById(@PathVariable("id") String id) {
+	    Optional<Cliente> clienteData = clienteRepository.findById(id);
+
+	    if (clienteData.isPresent()) {
+	      return new ResponseEntity<>(clienteData.get(), HttpStatus.OK);
+	    } else {
+	      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    }
+	  }
 
 }

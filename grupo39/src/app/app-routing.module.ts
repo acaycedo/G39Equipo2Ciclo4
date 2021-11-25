@@ -6,6 +6,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ClientesComponent } from './pages/clientes/clientes.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { CrearClienteComponent } from './pages/clientes/crear-cliente/crear-cliente.component';
+import { ActualizarClienteComponent } from './pages/clientes/actualizar-cliente/actualizar-cliente.component';
+import { ConsultarClienteComponent } from './pages/clientes/consultar-cliente/consultar-cliente.component';
 
 const routes: Routes = [
   {path:'productos',component: ProductosComponent},
@@ -16,7 +18,9 @@ const routes: Routes = [
   {path:'crear_cliente',component:CrearClienteComponent},
 
   {path:'usuarios', component:UsuariosComponent},
-  {path:'', component:DashboardComponent}
+  {path:'', component:DashboardComponent},
+  {path:'actualizarclientes', component:ActualizarClienteComponent},
+  {path:'consultar', component:ConsultarClienteComponent}
 ]
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
