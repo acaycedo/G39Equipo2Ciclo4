@@ -7,7 +7,8 @@
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2"><button type="button" class="btn btn-outline-primary" [routerLink]="['/clientes']"><i class="fas fa-arrow-left"></i></button> Clientes</h1>
+        <h1 class="h2"><button type="button" class="btn btn-outline-primary" [routerLink]="['/clientes']"><i
+              class="fas fa-arrow-left"></i></button> Clientes</h1>
 
         <div class="btn-toolbar mb-2 mb-md-0">
 
@@ -36,8 +37,7 @@
       <div class="card">
         <div class="card-body bg-light">
           <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" placeholder="cedula"
-              [(ngModel)]="id">
+            <input type="email" class="form-control" id="floatingInput" placeholder="cedula" [(ngModel)]="id">
             <label for="floatingInput"> ID</label>
           </div>
           <div class="form-floating mb-3">
@@ -66,14 +66,25 @@
           <div class="row">
             <div class="col-mg-6">
               <div class="btn-group">
-                <button class="btn btn-outline-success btn-lg" type="button" (click)="postData()" [routerLink]="['/clientes']">
+                <button class="btn btn-outline-success btn-lg" type="button" (click)="postData()">
                   Crear</button>
                 <button class="btn btn-primary btn-lg" type="button" (click)="refresh()"> Limpiar</button>
                 <button class="btn btn-primary btn-lg" type="button" (click)="buscarCliente()"> Buscar</button>
+                <button class="btn btn-danger btn-lg" type="button" (click)="deleteCliente()"> Eliminar</button>
               </div>
-
             </div>
           </div>
+          <br>
+          <div *ngIf="correcto==1" class="alert alert-success" role="alert">
+            Cliente creado con exito.
+          </div>
+          <div *ngIf="correcto==2" class="alert alert-danger" role="alert">
+            Validar los campos que esten llenos o no se repitan
+            <div class="spinner-border text-danger" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+
         </div>
       </div>
     </main>
