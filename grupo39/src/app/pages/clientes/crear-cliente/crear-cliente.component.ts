@@ -11,23 +11,12 @@ import { PruebaService } from 'src/app/services/prueba.service';
 })
 export class CrearClienteComponent implements OnInit {
 
-  constructor(private objetohttp: HttpClient, private api:PruebaService) { }
+  constructor(private objetohttp: HttpClient, private api: PruebaService) { }
 
   ngOnInit(): void {
   }
-  
 
-  currentTutorial = {
-    cedulacliente: '',
-    nombrecompleto: '',
-    direccion: '',
-    correo : '',
-    id: '',
-    telefono: ''
-  };
-  message = '';
-
-  urlAPI:string="http://localhost:8080/api/clientes";
+  urlAPI: string = "http://localhost:8080/api/clientes";
   codigoRespuesta!: number;
   res2: any;
   cedulacliente!: string;
@@ -36,8 +25,8 @@ export class CrearClienteComponent implements OnInit {
   correo !: string;
   id!: string;
   telefono!: string;
-  contenido!:any;
-  correcto:number=-1;
+  contenido!: any;
+  correcto: number = -1;
 
 
 
@@ -55,7 +44,7 @@ export class CrearClienteComponent implements OnInit {
     return throwError(errorMessage);
   }
 
-  postData(){
+  postData() {
     this.objetohttp.post<any>("http://localhost:8080/api/clientes",
       {
         cedulacliente: this.cedulacliente,
@@ -67,40 +56,81 @@ export class CrearClienteComponent implements OnInit {
       {
         observe: 'response'
       }
-    
-    ).subscribe(response=>{
-      this.codigoRespuesta=response.status;
-      this.res2=response;
-      if(this.codigoRespuesta=201){
-        this.correcto=1
-      }else{
-        this.correcto=2
+
+    ).subscribe(response => {
+      this.codigoRespuesta = response.status;
+      this.res2 = response;
+      if (this.codigoRespuesta = 201) {
+        this.correcto = 1
+      } else {
+        this.correcto = 2
       }
     });
   }
 
 
-  buscarCliente(){
-    this.res2=this.objetohttp.get(this.urlAPI+"?id="+this.id);
-    this.res2.subscribe((data:any[])=>{
-      this.contenido=data;
-      console.log(this.contenido);
-      this.cedulacliente=this.contenido[0].cedulacliente
-      this.nombrecompleto=this.contenido[0].nombrecompleto
-      this.direccion=this.contenido[0].direccion
-      this.telefono=this.contenido[0].telefono
-      this.correo=this.contenido[0].correo
+  putData() {
+    this.objetohttp.put<any>("http://localhost:8080/api/clientes"+ "?id="+ this.id,
+      {
+        cedulacliente: this.cedulacliente,
+        correo: this.correo,
+        direccion: this.direccion,
+        nombrecompleto: this.nombrecompleto,
+        telefono: this.telefono
+      },
+      {
+        observe: 'response'
+      }
+
+    ).subscribe(response => {
+      this.codigoRespuesta = response.status;
+      this.res2 = response;
+      if (this.codigoRespuesta = 201) {
+        this.correcto = 1
+      } else {
+        this.correcto = 2
+      }
     });
   }
 
 
-  deleteCliente(): void{
-    this.res2 = this.objetohttp.delete(this.urlAPI+"?id="+this.id).pipe(catchError(this.handleError));
+  buscarCliente() {
+    this.res2 = this.objetohttp.get(this.urlAPI + "?id=" + this.id);
+    this.res2.subscribe((data: any[]) => {
+      this.contenido = data;
+      for (let index = 0; index < this.contenido.length; index++) {
+        if (this.contenido[index].id == this.id) {
+          console.log(this.contenido[index]);
+          this.cedulacliente = this.contenido[index].cedulacliente
+          this.nombrecompleto = this.contenido[index].nombrecompleto
+          this.direccion = this.contenido[index].direccion
+          this.telefono = this.contenido[index].telefono
+          this.correo = this.contenido[index].correo
+          this.correcto = 3;
+        }else{
+          this.correcto = 4;
+        }
+      }
+
+    });
+  }
+
+  resultado: any;
+  contenido2: any;
+
+  deleteCliente(): void {
+    this.res2 = this.objetohttp.get(this.urlAPI + "?id=" + this.id).pipe(catchError(this.handleError));
     //suscribe el archivo json y lo convierte   
     this.res2.subscribe((datos: any[]) => {
-      this.contenido = datos;     
-      console.log(this.contenido);
-  });
+      this.contenido = datos;
+      for (let index = 0; index < this.contenido.length; index++) {
+        if (this.contenido[index].id == this.id) {
+              this.objetohttp.delete(this.urlAPI).pipe(catchError(this.handleError));
+              this.resultado.subscribe((data: any[])=>
+              { this.contenido2 = data   })
+            }
+          }
+    });
     window.location.reload();
   }
 
