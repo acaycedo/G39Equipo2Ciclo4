@@ -1,6 +1,7 @@
 package com.grupo39.misiontic2022.ciclo4.Abdidas39.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "productos")
@@ -8,7 +9,8 @@ public class Producto {
 
 	@Id
 	private String id;
-
+	
+	@Indexed (unique=true)
 	private String codigoproducto;
 	private String ivacompra;
 	private String nitproveedor;

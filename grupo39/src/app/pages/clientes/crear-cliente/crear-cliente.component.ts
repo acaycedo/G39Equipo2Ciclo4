@@ -114,12 +114,12 @@ export class CrearClienteComponent implements OnInit {
 
     });
   }
-
+  
   resultado: any;
   contenido2: any;
 
   deleteCliente(): void {
-    this.res2 = this.objetohttp.get(this.urlAPI + "?id=" + this.id).pipe(catchError(this.handleError));
+    this.res2 = this.objetohttp.get(this.urlAPI + "/" + this.id).pipe(catchError(this.handleError));
     //suscribe el archivo json y lo convierte   
     this.res2.subscribe((datos: any[]) => {
       this.contenido = datos;
