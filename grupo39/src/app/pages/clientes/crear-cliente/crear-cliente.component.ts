@@ -105,7 +105,7 @@ export class CrearClienteComponent implements OnInit {
       if (this.codigoRespuesta >= 200 && this.codigoRespuesta< 400) {
         this.toastrServ.success('Datos de cliente a actualizados con exito');
       }else{
-        this.toastrServ.error('El cliente a actualizar no existe, valide el ID');
+        this.toastrServ.warning('El cliente a actualizar no existe, valide el ID');
       }
     }
   }

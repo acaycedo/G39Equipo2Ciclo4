@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo39.misiontic2022.ciclo4.Abdidas39.model.Cliente;
 import com.grupo39.misiontic2022.ciclo4.Abdidas39.repository.ClienteRepository;
+import org.springframework.dao.DuplicateKeyException;
 
 @CrossOrigin(origins = "*")
 //@CrossOrigin(origins = "http://localhost:8081")
@@ -59,6 +60,8 @@ public class ClienteController {
 		try {
 			Cliente _cliente = clienteRepository.save(new Cliente(client.getId(),client.getCedulacliente(),client.getCorreo(),client.getDireccion(),client.getNombrecompleto(),client.getTelefono()));
 			return new ResponseEntity<>(_cliente, HttpStatus.CREATED);
+		}catch (DuplicateKeyException e) {
+			return new ResponseEntity<>(null, HttpStatus.CONFLICT);
 		}catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
