@@ -8,17 +8,20 @@ public class Cliente {
 	@Id
 	private String id;
 	private String cedulacliente;
-	private String nombrecompleto;
+	private String correo;	
+	
 	private String direccion;
+	private String nombrecompleto;
 	private String telefono;
-	private String correo;
+	
+	
 	
 	public Cliente() {
 		
 	}
 	
-	public Cliente(String id, String cedulacliente, String nombrecompleto,
-			String direccion, String telefono, String correo) {
+	public Cliente(String id, String cedulacliente,String correo,
+			String direccion, String telefono , String nombrecompleto ) {
 		super();
 		this.id = id;
 

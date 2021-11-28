@@ -18,16 +18,19 @@ export class CrearClienteComponent implements OnInit {
   }
 
   urlAPI: string = "http://localhost:8080/api/clientes";
+
   codigoRespuesta!: number;
   res2: any;
-  cedulacliente!: string;
-  nombrecompleto!: string;
-  direccion!: string;
-  correo !: string;
+
   id!: string;
+  cedulacliente!: string;
+  correo !: string;
+  direccion!: string;
+  nombrecompleto!: string;
   telefono!: string;
-  contenido!: any;
+
   correcto: number = -1;
+  contenido!: any;
 
 
 
@@ -51,6 +54,7 @@ export class CrearClienteComponent implements OnInit {
     } else {
       this.objetohttp.post<any>("http://localhost:8080/api/clientes",
         {
+          id: null,
           cedulacliente: this.cedulacliente,
           correo: this.correo,
           direccion: this.direccion,
@@ -115,14 +119,14 @@ export class CrearClienteComponent implements OnInit {
       this.res2.subscribe((data: any[]) => {
         this.contenido = data;
         let bandera = false;
-        for (let index = 1; index < this.contenido.length; index++) {
+        for (let index = 0; index < this.contenido.length; index++) {
           if (this.contenido[index].id == this.id) {
             console.log(this.contenido[index]);
             this.cedulacliente = this.contenido[index].cedulacliente
-            this.nombrecompleto = this.contenido[index].nombrecompleto
-            this.direccion = this.contenido[index].direccion
-            this.telefono = this.contenido[index].telefono
             this.correo = this.contenido[index].correo
+            this.direccion = this.contenido[index].direccion
+            this.nombrecompleto = this.contenido[index].nombrecompleto
+            this.telefono = this.contenido[index].telefono
             this.correcto = 3;
             bandera = true;
 

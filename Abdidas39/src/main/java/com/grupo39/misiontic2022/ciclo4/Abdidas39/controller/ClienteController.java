@@ -57,7 +57,7 @@ public class ClienteController {
 	@PostMapping("/clientes")
 	public ResponseEntity<Cliente> createCliente(@RequestBody Cliente client) {
 		try {
-			Cliente _cliente = clienteRepository.save(new Cliente(null,client.getCedulacliente(),client.getCorreo(),client.getDireccion(),client.getNombrecompleto(),client.getTelefono()));
+			Cliente _cliente = clienteRepository.save(new Cliente(client.getId(),client.getCedulacliente(),client.getCorreo(),client.getDireccion(),client.getNombrecompleto(),client.getTelefono()));
 			return new ResponseEntity<>(_cliente, HttpStatus.CREATED);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -72,10 +72,11 @@ public class ClienteController {
 		if (clienteData.isPresent()) {
 			Cliente _cliente = clienteData.get();
 			_cliente.setCedulacliente(client.getCedulacliente());
-			_cliente.setNombrecompleto(client.getNombrecompleto());
-			_cliente.setDireccion(client.getDireccion());
-			_cliente.setTelefono(client.getTelefono());
 			_cliente.setCorreo(client.getCorreo());
+			_cliente.setDireccion(client.getDireccion());
+			_cliente.setNombrecompleto(client.getNombrecompleto());
+			_cliente.setTelefono(client.getTelefono());
+			
 
 			return new ResponseEntity<>(clienteRepository.save(_cliente), HttpStatus.OK);
 		} else {
