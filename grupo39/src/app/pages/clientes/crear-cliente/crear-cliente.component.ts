@@ -54,7 +54,7 @@ export class CrearClienteComponent implements OnInit {
     } else {
       this.objetohttp.post<any>("http://localhost:8080/api/clientes",
         {
-          id: null,
+          id:null,
           cedulacliente: this.cedulacliente,
           correo: this.correo,
           direccion: this.direccion,
@@ -158,10 +158,11 @@ export class CrearClienteComponent implements OnInit {
           if (this.contenido[index].id == this.id) {
             console.log(this.contenido[index]);
             this.cedulacliente = this.contenido[index].cedulacliente
-            this.nombrecompleto = this.contenido[index].nombrecompleto
-            this.direccion = this.contenido[index].direccion
-            this.telefono = this.contenido[index].telefono
             this.correo = this.contenido[index].correo
+            this.direccion = this.contenido[index].direccion
+            this.nombrecompleto = this.contenido[index].nombrecompleto
+            this.telefono = this.contenido[index].telefono
+            
             this.correcto = 3;
             bandera = true;
 

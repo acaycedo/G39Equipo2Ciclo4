@@ -9,7 +9,6 @@ public class Cliente {
 	private String id;
 	private String cedulacliente;
 	private String correo;	
-	
 	private String direccion;
 	private String nombrecompleto;
 	private String telefono;
@@ -21,7 +20,7 @@ public class Cliente {
 	}
 	
 	public Cliente(String id, String cedulacliente,String correo,
-			String direccion, String telefono , String nombrecompleto ) {
+			String direccion,String nombrecompleto, String telefono) {
 		super();
 		this.id = id;
 
