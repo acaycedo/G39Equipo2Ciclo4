@@ -154,7 +154,7 @@ export class CrearClienteComponent implements OnInit {
       this.res2.subscribe((data: any[]) => {
         this.contenido = data;
         let bandera = false;
-        for (let index = 1; index < this.contenido.length; index++) {
+        for (let index = 0; index < this.contenido.length; index++) {
           if (this.contenido[index].id == this.id) {
             console.log(this.contenido[index]);
             this.cedulacliente = this.contenido[index].cedulacliente
