@@ -46,7 +46,7 @@ export class CrearClienteComponent implements OnInit {
   }
 
   postData() {
-    if (!this.id || !this.cedulacliente || !this.correo || !this.direccion || !this.nombrecompleto || !this.telefono) {
+    if (!this.cedulacliente || !this.correo || !this.direccion || !this.nombrecompleto || !this.telefono) {
       this.toastrServ.error('Por favor llenar cada uno de los campos para realizar el registro');
     } else {
       this.objetohttp.post<any>("http://localhost:8080/api/clientes",
@@ -64,7 +64,7 @@ export class CrearClienteComponent implements OnInit {
       ).subscribe(response => {
         this.codigoRespuesta = response.status;
         this.res2 = response;
-        if (this.codigoRespuesta = 201) {
+        if (this.codigoRespuesta >= 201 && this.codigoRespuesta< 400) {
           this.correcto = 1
           this.toastrServ.success('Cliente registrado con exito');
         } else {
@@ -98,7 +98,7 @@ export class CrearClienteComponent implements OnInit {
         this.codigoRespuesta = response.status;
       });
 
-      if (this.codigoRespuesta == 200) {
+      if (this.codigoRespuesta >= 200 && this.codigoRespuesta< 400) {
         this.toastrServ.success('Datos de cliente a actualizados con exito');
       }else{
         this.toastrServ.error('El cliente a actualizar no existe, valide el ID');
