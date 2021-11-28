@@ -4,7 +4,8 @@
   <div class="row">
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Productos</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
@@ -16,7 +17,7 @@
             This week
           </button>
         </div>
-        
+
       </div>
       <div class="container">
         <div class="row">
@@ -29,30 +30,27 @@
               Cargar
             </button>
             <button class="btn btn-primary" (click)="refresh()" type="button"> Recargar</button>
-            <button class="btn btn-danger" (click)="delete_prod()" type="button"> Borrar BD</button> 
+            <button class="btn btn-danger" (click)="delete_prod()" type="button"> Borrar BD</button>
           </div>
         </div>
-        <div *ngIf="correcto==1" class="alert alert-success" role="alert">
+        <!--         <div *ngIf="correcto==1" class="alert alert-success" role="alert">
           Archivo subido.
-        </div>
-        <div *ngIf="correcto==0" class="alert alert-danger" role="alert">
-          Usuario o Contraseña incorrecto.
-          <div class="spinner-border text-danger" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-        </div>
-        <div *ngIf="correcto==2" class="alert alert-warning" role="alert">
-          Ingrese usuario y contraseña!
-        </div>
-      </div>
-        <div class="col-md-auto">
-          <h3 *ngFor="let dato of resultados; let i = index">
-            Dato {{i}} obtuvo codigo {{dato[0]}} 
-          </h3>
+        </div> -->
 
+
+      </div>
+      <div class="col-md-auto">
+        <!--           <h3 *ngFor="let dato of resultados; let i = index">
+            Dato {{i}} obtuvo codigo {{dato[0]}} 
+          </h3> -->
+         <p></p> 
+        <div *ngIf="alerta==1" class="alert alert-primary" role="alert">
+          De click en el boton 'Recargar' para ver los productos agregados
         </div>
-        {{codigoRespuesta}}
-        <br>
+
+      </div>
+      <!-- {{codigoRespuesta}} -->
+      <br>
       <h2>Tabla Productos</h2>
       <div class="table-responsive">
         <table class="compact nowrap table table-dark table-hover table-striped" datatable [dtOptions]="dtOptions"
@@ -73,7 +71,7 @@
               <td>{{producto.id}}</td>
               <td>{{producto.codigoproducto}}</td>
               <td>{{producto.nombreproducto}}</td>
-              <td>{{producto.nitproveedor}}</td>              
+              <td>{{producto.nitproveedor}}</td>
               <td>{{producto.preciocompra}}</td>
               <td>{{producto.ivacompra}}</td>
               <td>{{producto.precioventa}}</td>
@@ -89,7 +87,3 @@
 <br>
 <br>
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
-

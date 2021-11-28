@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Subject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { FileUploadService } from './file-upload.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -17,7 +18,7 @@ import { FileUploadService } from './file-upload.service';
 export class ProductosComponent implements OnInit {
 
   //Función constructora
-  constructor(private objetohttp: HttpClient, private fileUploadService: FileUploadService) { }
+  constructor(private objetohttp: HttpClient, private fileUploadService: FileUploadService, private toastrServ: ToastrService) { }
 
   ///////////////// GET /////////////////////////////
   //opciones y objeto revisor de la tabla
@@ -28,7 +29,7 @@ export class ProductosComponent implements OnInit {
   res: any;
   //variable contenedora de contenidos
   contenido: any;
-  csv:any;
+  csv: any;
   //url api get
   /* urlapiGET: string = "http://universities.hipolabs.com/search?name=middle"; */
   urlapiGET: string = "http://localhost:8080/api/productos";
@@ -60,20 +61,20 @@ export class ProductosComponent implements OnInit {
 
   ///////////////// METODOS ANGULAR /////////////////////////////
 
-  delete_prod(): void{
+  delete_prod(): void {
     this.res = this.objetohttp.delete(this.urlapiDELETE).pipe(catchError(this.handleError));
 
     //suscribe el archivo json y lo convierte   
     this.res.subscribe((datos: any[]) => {
-      this.contenido = datos;     
-      
+      this.contenido = datos;
+
       console.log(this.contenido);
       this.dtTrigger.next(this.dtOptions);
     });
 
     window.location.reload();
 
-    
+
   }
 
   //FUNCIÓN DE EJECUCIÓN ANTES DE LA CARGA DE LA PAGINA
@@ -83,13 +84,13 @@ export class ProductosComponent implements OnInit {
 
     //suscribe el archivo json y lo convierte   
     this.res.subscribe((datos: any[]) => {
-      this.contenido = datos;     
-      
+      this.contenido = datos;
+
       console.log(this.contenido);
       this.dtTrigger.next(this.dtOptions);
     });
 
-    
+
 
     //Opciones especiales de la tabla, localización y caracteristicas
     this.dtOptions = {
@@ -137,15 +138,16 @@ export class ProductosComponent implements OnInit {
   }
 
   ///////////////// POST /////////////////////////////
-  correcto:number=-1;
+  correcto: number = -1;
 
   codigoRespuesta: number = 0;
   res2: any;
 
   //lista que almacenara los resultados de la insercion de cada linea
   resultados: any;
-
   
+  
+
   // Variable to store shortLink from api response
   file!: File; //variable para almacenar los datos
 
@@ -153,17 +155,19 @@ export class ProductosComponent implements OnInit {
   recibido: boolean = false;
 
 
-  
+
   // En caso de seleccionar archivo, escojer el primer archivo
   onChange(event: any) {
     this.file = event.target.files[0];
-    this.recibido=true
-    if (this.recibido=true){
-      this.correcto=1;
+    this.recibido = true
+    if (this.recibido = true) {
+      this.correcto = 1;
+      this.toastrServ.info('Base CSV cargada con éxito');
     }
-    
+
   }
-  
+
+  alerta = 0;
 
   // Cuandop haga click, iniciar proceso de envio
   async onUpload() {
@@ -173,8 +177,7 @@ export class ProductosComponent implements OnInit {
     console.log(this.file.name);
     console.log(this.file.size);
     console.log(this.file.type);
-    
-    
-    window.location.reload();
+    this.alerta = 1;
+    /* window.location.reload(); */
   }
 }

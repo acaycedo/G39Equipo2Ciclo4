@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProductosComponent } from './productos.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,10 @@ export class FileUploadService {
   baseApiUrl = "http://localhost:8080/api/productos";
 
   //inicializando objeto http
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private toastrServ: ToastrService) { }
 
   //variable auxiliar que almacena resultados de cada envio
   resultados = Array();
-
   // Retorna un objeto observable
   upload(file: any): Promise<any[]> {
     return new Promise<any[]>((resolve, reject) => {
@@ -48,8 +48,10 @@ export class FileUploadService {
                 let resaux = [];
                 resaux[0] = response.status;
                 this.resultados.push(resaux);
+                let tmp:string = columnas[3];
+                this.toastrServ.success("Producto " + columnas[3] + " agregado");
               }
-            );
+            );            
         }
         console.log(this.resultados);
         resolve(this.resultados);
