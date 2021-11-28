@@ -16,6 +16,11 @@ import { ClientesComponent } from './pages/clientes/clientes.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { CrearClienteComponent } from './pages/clientes/crear-cliente/crear-cliente.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
+
+
 
 @NgModule({
   declarations: [
@@ -28,14 +33,17 @@ import { CrearClienteComponent } from './pages/clientes/crear-cliente/crear-clie
     DashboardComponent,
     ClientesComponent,
     UsuariosComponent,
-    CrearClienteComponent,
+    CrearClienteComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    DataTablesModule
+    DataTablesModule,
+
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
     
   ],
   providers: [],
