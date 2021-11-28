@@ -54,7 +54,7 @@ export class CrearClienteComponent implements OnInit {
     } else {
       this.objetohttp.post<any>("http://localhost:8080/api/clientes",
         {
-          id:null,
+          id: null,
           cedulacliente: this.cedulacliente,
           correo: this.correo,
           direccion: this.direccion,
@@ -67,8 +67,8 @@ export class CrearClienteComponent implements OnInit {
 
       ).subscribe(response => {
         this.codigoRespuesta = response.status;
-        this.res2 = response;
-        if (this.codigoRespuesta >= 201 && this.codigoRespuesta< 400) {
+        this.res2 = response;                
+        if (this.codigoRespuesta >= 201 && this.codigoRespuesta < 400) {
           this.correcto = 1
           this.toastrServ.success('Cliente registrado con exito');
         } else {
@@ -76,6 +76,11 @@ export class CrearClienteComponent implements OnInit {
           this.correcto = 2
         }
       });
+      
+      if(this.codigoRespuesta === undefined){
+        this.toastrServ.warning('La cédula que intenta registrar ya existe');
+      }
+      
     }
   }
 
@@ -102,9 +107,9 @@ export class CrearClienteComponent implements OnInit {
         this.codigoRespuesta = response.status;
       });
 
-      if (this.codigoRespuesta >= 200 && this.codigoRespuesta< 400) {
+      if (this.codigoRespuesta >= 200 && this.codigoRespuesta < 400) {
         this.toastrServ.success('Datos de cliente a actualizados con exito');
-      }else{
+      } else {
         this.toastrServ.warning('El cliente a actualizar no existe, valide el ID');
       }
     }
@@ -162,7 +167,7 @@ export class CrearClienteComponent implements OnInit {
             this.direccion = this.contenido[index].direccion
             this.nombrecompleto = this.contenido[index].nombrecompleto
             this.telefono = this.contenido[index].telefono
-            
+
             this.correcto = 3;
             bandera = true;
 
