@@ -116,16 +116,17 @@ export class CrearClienteComponent implements OnInit {
       alert("Cliente eliminado con exito")
       this.id = "";
     })
+  } 
+
+  limpiar(){
+    this.id = "";
+    this.cedulacliente = "";
+    this.nombrecompleto = "";
+    this.direccion = "";
+    this.telefono = "";
+    this.correo = "";
   }
   
-
-
-
-
-
-
-
-
   refresh(): void { window.location.reload(); }
 
 }
