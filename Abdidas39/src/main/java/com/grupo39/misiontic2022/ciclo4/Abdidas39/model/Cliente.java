@@ -2,13 +2,11 @@ package com.grupo39.misiontic2022.ciclo4.Abdidas39.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.index.Indexed;
 @Document(collection = "clientes")
 public class Cliente {
 	
 	@Id
 	private String id;
-	@Indexed(unique=true)
 	private String cedulacliente;
 	private String nombrecompleto;
 	private String direccion;
