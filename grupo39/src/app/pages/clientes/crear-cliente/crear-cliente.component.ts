@@ -70,13 +70,14 @@ export class CrearClienteComponent implements OnInit {
 
 
   putData() {
-    this.objetohttp.put<any>("http://localhost:8080/api/clientes"+ "?id="+ this.id,
+    return this.objetohttp.put(this.urlAPI+ "/"+ this.id,
       {
         cedulacliente: this.cedulacliente,
         correo: this.correo,
         direccion: this.direccion,
         nombrecompleto: this.nombrecompleto,
         telefono: this.telefono
+        
       },
       {
         observe: 'response'
@@ -84,13 +85,8 @@ export class CrearClienteComponent implements OnInit {
 
     ).subscribe(response => {
       this.codigoRespuesta = response.status;
-      this.res2 = response;
-      if (this.codigoRespuesta = 201) {
-        this.correcto = 1
-      } else {
-        this.correcto = 2
-      }
     });
+    
   }
 
 
@@ -115,24 +111,17 @@ export class CrearClienteComponent implements OnInit {
     });
   }
   
-  resultado: any;
-  contenido2: any;
-
-  deleteCliente(): void {
-    this.res2 = this.objetohttp.get(this.urlAPI + "/" + this.id).pipe(catchError(this.handleError));
-    //suscribe el archivo json y lo convierte   
-    this.res2.subscribe((datos: any[]) => {
-      this.contenido = datos;
-      for (let index = 0; index < this.contenido.length; index++) {
-        if (this.contenido[index].id == this.id) {
-              this.objetohttp.delete(this.urlAPI).pipe(catchError(this.handleError));
-              this.resultado.subscribe((data: any[])=>
-              { this.contenido2 = data   })
-            }
-          }
-    });
-    window.location.reload();
+  deleteCliente(){
+    return this.objetohttp.delete(this.urlAPI + '/' + this.id).subscribe(() => {
+      alert("Cliente eliminado con exito")
+      this.id = "";
+    })
   }
+  
+
+
+
+
 
 
 
