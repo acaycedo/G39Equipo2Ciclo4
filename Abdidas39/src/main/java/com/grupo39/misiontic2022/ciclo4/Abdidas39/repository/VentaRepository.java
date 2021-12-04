@@ -3,11 +3,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import com.grupo39.misiontic2022.ciclo4.Abdidas39.model.Venta;
 import java.util.List;
 
-
-
-
-
-
 public interface VentaRepository extends MongoRepository<Venta, String> {
 
 	List<Venta> findByCodigoventa(Long codigoventa);

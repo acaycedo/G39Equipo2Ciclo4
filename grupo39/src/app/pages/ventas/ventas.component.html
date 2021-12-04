@@ -1,0 +1,167 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+<div class="container-fluid">
+    <div class="row">
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div
+                class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2"><button type="button" class="btn btn-outline-primary" [routerLink]="['/clientes']"><i
+                            class="fas fa-arrow-left"></i></button> Ventas</h1>
+
+                <div class="btn-toolbar mb-2 mb-md-0">
+
+                    <div class="btn-group me-2">
+                        <button type="button" class="btn btn-sm btn-outline-secondary"
+                            [routerLink]="['/crear_cliente']">Share</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary"
+                            [routerLink]="['/crear_cliente']">Export</button>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                        <span data-feather="calendar"></span>
+                        This week
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    Consultar Cliente
+                  </div>
+                <div class="card-body ">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="floatingInput" placeholder="cedula" [(ngModel)]="cedulacliente">
+                                    <label for="floatingInput"> Cedula</label>
+
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <button type="button" class="btn btn-primary" (click)="buscarCliente()">Consultar <i class="fas fa-arrow-right"></i></button>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="floatingInput" placeholder="Cliente"
+                                        disabled="disabled" [(ngModel)]="nombrecliente">
+                                    <label for="floatingInput"> Cliente</label>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="floatingInput" placeholder="cedula"
+                                        disabled="disabled">
+                                    <label for="floatingInput"> Consecutivo</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    Inserte los datos solicitados.
+                  </div>
+                <div class="card-body">
+                    
+                    <div class="container">
+                        <div class="d-flex">
+                            <div class="col">
+                                <input type="text" name="" [(ngModel)]="codigoproducto">
+                                <button class="btn btn-primary" type="submit" (click)="buscarProducto()">
+                                    <i class="fas fa-search"></i></button>
+                            </div>
+                            <div class="col">
+                                <input type="text" name="" [(ngModel)]="nombreproducto" disabled="disabled">
+
+                            </div>
+                            <div class="col">
+                                <input type="text" name="" [(ngModel)]="cantidad">
+                                <button class="btn btn-primary" type="submit" (click)="calcularSubtotal()">
+                                    <i class="fas fa-hand-point-right"></i>
+                                </button>
+                            </div>
+                            <div class="col">
+                                <input type="text" name="" [(ngModel)]="valortotalproducto" disabled="disabled">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="d-flex">
+                            <div class="col">
+                                <input type="text" name="" [(ngModel)]="codigoproducto2">
+                                <button class="btn btn-primary" type="submit" (click)="buscarProducto2()">
+                                    <i class="fas fa-search"></i></button>
+                            </div>
+                            <div class="col">
+                                <input type="text" name=""  disabled="disabled"[(ngModel)]="nombreproducto2" >
+
+                            </div>
+                            <div class="col">
+                                <input type="text" name="" [(ngModel)]="cantidad2">
+                                <button class="btn btn-primary" type="submit" (click)="calcularSubtotal2()">
+                                    <i class="fas fa-hand-point-right"></i>
+                                </button>
+                            </div>
+                            <div class="col">
+                                <input type="text" name="" [(ngModel)]="valortotalproducto2" disabled="disabled" >
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="container">
+                        <div class="d-flex">
+                            <div class="col">
+                                <input type="text" name="" [(ngModel)]="codigoproducto3">
+                                <button class="btn btn-primary" type="submit" (click)="buscarProducto3()" >
+                                    <i class="fas fa-search"></i></button>
+                            </div>
+                            <div class="col">
+                                <input type="text" name="" disabled="disabled" [(ngModel)]="nombreproducto3">
+
+                            </div>
+                            <div class="col">
+                                <input type="text" name="" [(ngModel)]="cantidad3">
+                                <button class="btn btn-primary" type="submit" (click)="calcularSubtotal3()">
+                                    <i class="fas fa-hand-point-right"></i>
+                                </button>
+                            </div>
+                            <div class="col">
+                                <input type="text" name="" [(ngModel)]="valortotalproducto3" disabled="disabled">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="container">
+                        <div class="d-flex flex-wrap">
+                            <div class="col" style="text-align: right;">
+                                <button class="btn btn-primary" type="submit" (click)="confirmar()">Confirmar</button>
+                            </div>
+                            <div class="col-1"></div>
+                            <div class="col-3">
+                                <label for="">Total Venta</label>
+                                <br>
+                                <label for="">Total IVA</label>
+
+                                <br>
+                                <label for="">Total con IVA</label>
+
+                            </div>
+                            <div class="col-3">
+                                <input type="text" name="" [(ngModel)]="totalventa" disabled="disabled">
+                                <br>
+                                <input type="text" name="" [(ngModel)]="totaliva" disabled="disabled">
+                                <br>
+                                <input type="text" name="" [(ngModel)]="totalconiva" disabled="disabled">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>

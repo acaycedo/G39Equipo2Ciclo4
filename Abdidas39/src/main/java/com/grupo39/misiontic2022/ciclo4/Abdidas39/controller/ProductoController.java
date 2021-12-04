@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.grupo39.misiontic2022.ciclo4.Abdidas39.model.Cliente;
 import com.grupo39.misiontic2022.ciclo4.Abdidas39.model.Producto;
 import com.grupo39.misiontic2022.ciclo4.Abdidas39.repository.ProductoRepository;
 
@@ -53,7 +54,7 @@ public class ProductoController {
 	}
 	
 
-	@GetMapping("/productos/{id}")
+	@GetMapping("/productos/id/{id}")
 	public ResponseEntity<Producto> getProductoById(@PathVariable("id") String id) {
 		Optional<Producto> productoData = productoRepository.findById(id);
 
@@ -63,6 +64,19 @@ public class ProductoController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
+	@GetMapping("/productos/codigoproducto/{codigoproducto}")
+	public ResponseEntity<ArrayList<Producto>> getProductoByCodigoprodcuto(@PathVariable("codigoproducto") String codigoproducto) {
+		ArrayList<Producto> aux = (ArrayList<Producto>) productoRepository.findByCodigoproducto(codigoproducto);
+		Optional<ArrayList<Producto>> productoData = Optional.of(aux);
+
+		if (productoData.isPresent()) {
+			return new ResponseEntity<>(productoData.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+	}
+
+	
 
 	@PostMapping("/productos")
 	public ResponseEntity<Producto> createProducto(@RequestBody Producto product) {
@@ -115,7 +129,7 @@ public class ProductoController {
 		}
 	}
 
-	@GetMapping("/productos/{nombreproducto}")
+	@GetMapping("/productos/nombreproducto/{nombreproducto}")
 	public ResponseEntity<List<Producto>> findByUsername(@PathVariable("nombreproducto") String nombreproducto) {
 		try {
 			List<Producto> productos = productoRepository.findByNombreproducto(nombreproducto);

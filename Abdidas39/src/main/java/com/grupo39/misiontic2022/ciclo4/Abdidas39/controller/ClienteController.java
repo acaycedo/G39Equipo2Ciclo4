@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo39.misiontic2022.ciclo4.Abdidas39.model.Cliente;
+import com.grupo39.misiontic2022.ciclo4.Abdidas39.model.Venta;
 import com.grupo39.misiontic2022.ciclo4.Abdidas39.repository.ClienteRepository;
 import org.springframework.dao.DuplicateKeyException;
 
@@ -51,6 +52,17 @@ public class ClienteController {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
+	}
+	@GetMapping("/clientes/cedula/{cedula}")
+	public ResponseEntity<ArrayList<Cliente>> getClienteByCedulacliente(@PathVariable("cedula") String cedulacliente) {
+		ArrayList<Cliente> aux = (ArrayList<Cliente>) clienteRepository.findByCedulacliente(cedulacliente);
+		Optional<ArrayList<Cliente>> ventaData = Optional.of(aux);
+
+		if (ventaData.isPresent()) {
+			return new ResponseEntity<>(ventaData.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
 	}
 
 	

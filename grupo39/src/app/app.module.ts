@@ -19,6 +19,8 @@ import { CrearClienteComponent } from './pages/clientes/crear-cliente/crear-clie
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
+import { VentasComponent } from './pages/ventas/ventas.component';
+import { ReportesComponent } from './pages/reportes/reportes.component';
 
 
 
@@ -33,7 +35,9 @@ import { ToastrModule } from 'ngx-toastr';
     DashboardComponent,
     ClientesComponent,
     UsuariosComponent,
-    CrearClienteComponent
+    CrearClienteComponent,
+    VentasComponent,
+    ReportesComponent
   ],
   imports: [
     BrowserModule,

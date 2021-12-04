@@ -6,6 +6,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ClientesComponent } from './pages/clientes/clientes.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { CrearClienteComponent } from './pages/clientes/crear-cliente/crear-cliente.component';
+import { VentasComponent } from './pages/ventas/ventas.component';
+import { ReportesComponent } from './pages/reportes/reportes.component';
 const routes: Routes = [
   {path:'productos',component: ProductosComponent},
   {path:'dasboard',component: DashboardComponent},
@@ -16,6 +18,8 @@ const routes: Routes = [
 
   {path:'usuarios', component:UsuariosComponent},
   {path:'', component:DashboardComponent},
+  {path:'ventas', component:VentasComponent},
+  {path:'reportes', component:ReportesComponent}
 ]
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
