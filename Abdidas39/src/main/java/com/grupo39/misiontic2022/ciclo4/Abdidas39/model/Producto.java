@@ -12,25 +12,24 @@ public class Producto {
 	
 	@Indexed (unique=true)
 	private String codigoproducto;
-	private String ivacompra;
-	private String nitproveedor;
 	private String nombreproducto;
+	private String nitproveedor;
 	private String preciocompra;
+	private String ivacompra;
 	private String precioventa;
-
 	public Producto() {
 
 	}
 
-	public Producto(String id, String codigoproducto, String ivacompra, String nitproveedor, String nombreproducto,
-			String preciocompra, String precioventa) {
+	public Producto(String id, String codigoproducto, String nombreproducto, String nitproveedor,String preciocompra, String ivacompra,  
+			 String precioventa) {
 		super();
 		this.id = id;
 		this.codigoproducto = codigoproducto;
-		this.ivacompra = ivacompra;
-		this.nitproveedor = nitproveedor;
 		this.nombreproducto = nombreproducto;
+		this.nitproveedor = nitproveedor;
 		this.preciocompra = preciocompra;
+		this.ivacompra = ivacompra;
 		this.precioventa = precioventa;
 	}
 

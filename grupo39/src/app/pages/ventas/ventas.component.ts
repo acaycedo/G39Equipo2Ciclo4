@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { throwError } from 'rxjs';
 import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-ventas',
@@ -26,6 +27,7 @@ export class VentasComponent implements OnInit {
   id!: string;
   cedulacliente!: string;
   nombrecliente!:string;
+  consecutivo!:any;
 
   handleError(error: HttpErrorResponse) {
     let errorMessage = 'Error desconocido!';
@@ -39,6 +41,15 @@ export class VentasComponent implements OnInit {
     //MOSTRANDO UN ERROR EN UNA ALERTA
     //window.alert(errorMessage);
     return throwError(errorMessage);
+  }
+  buscarVentas(){
+    this.res2 = this.objetohttp.get(this.urlapiventas).pipe(catchError(this.handleError));
+    this.res2.subscribe((datos: any[]) => {
+      this.contenido = datos;
+
+      console.log(datos.length);
+      this.consecutivo=datos.length+1;    
+    });
   }
 
   buscarCliente() {
@@ -75,7 +86,7 @@ export class VentasComponent implements OnInit {
   codigoproducto!: string;
   nombreproducto!: string;
   preciocompra!:number;
-  precioventa!:number;
+  precioventa:number=0;
   ivacompra!:number;
 
 
@@ -84,7 +95,7 @@ export class VentasComponent implements OnInit {
   res3!:any;
 
   totalventa: number=0;
-  totaliva:number=19;
+  totaliva:number=0;
   totalconiva:number=0;
 
 
@@ -128,7 +139,7 @@ export class VentasComponent implements OnInit {
       this.toastrServ.warning('Por favor ingrese una cantidad mayor a 0');
     }else{
       if(this.cantidad>0){
-        this.valortotalproducto=this.cantidad*this.preciocompra
+        this.valortotalproducto=this.cantidad*this.precioventa
 
       }else{
         this.toastrServ.error('Cantidad debe ser mayor de 0');
@@ -142,7 +153,7 @@ export class VentasComponent implements OnInit {
   nombreproducto2!: string;
   cantidad2: number=0;
   preciocompra2!:number;
-  precioventa2!:number;
+  precioventa2:number=0;
   ivacompra2!:number;
 
   valortotalproducto2:number=0;
@@ -190,7 +201,7 @@ export class VentasComponent implements OnInit {
       this.toastrServ.warning('Por favor ingrese una cantidad mayor a 0');
     }else{
       if(this.cantidad2 >0){
-        this.valortotalproducto2=this.cantidad2*this.preciocompra2
+        this.valortotalproducto2=this.cantidad2*this.precioventa2
 
       }else{
         this.toastrServ.error('Cantidad debe ser mayor de 0');
@@ -203,7 +214,7 @@ export class VentasComponent implements OnInit {
   nombreproducto3!: string;
   cantidad3: number=0;
   preciocompra3!:number;
-  precioventa3!:number;
+  precioventa3:number=0;
   ivacompra3!:number;
 
   valortotalproducto3:number=0;
@@ -245,7 +256,7 @@ export class VentasComponent implements OnInit {
       this.toastrServ.warning('Por favor ingrese una cantidad mayor a 0');
     }else{
       if(this.cantidad3 >0){
-        this.valortotalproducto3=this.cantidad3*this.preciocompra3
+        this.valortotalproducto3=this.cantidad3*this.precioventa3
 
       }else{
         this.toastrServ.error('Cantidad debe ser mayor de 0');
@@ -253,15 +264,92 @@ export class VentasComponent implements OnInit {
       
     }
   }
+
+  valoriva1:number=0;
+  valoriva2:number=0;
+  valoriva3:number=0;
+
+
+  urlapiventas: string = "http://localhost:8080/api/ventas";
+
+
   confirmar(){
     if(!this.cedulacliente||!this.nombrecliente){
       this.toastrServ.error('Por favor ingrese el cliente');
 
     }else{
+      
       this.totalventa=this.valortotalproducto+this.valortotalproducto2+this.valortotalproducto3;
-      this.totaliva=this.totalventa*this.totaliva/100;
-      this.totalconiva=this.totalventa+this.totaliva;
+     
+      if(this.cantidad>0){
+        this.valoriva1=(this.valortotalproducto*this.ivacompra)/100;
+        this.totaliva+=this.valoriva1;
+        if(this.cantidad2>0){
+          this.valoriva1=(this.valortotalproducto2*this.ivacompra2)/100;
+          this.totaliva+=this.valoriva2;
+          if(this.cantidad3>0){
+            this.valoriva1=(this.valortotalproducto3*this.ivacompra3)/100;
+            this.totaliva+=this.valoriva3;
+            
+          }
+        }
+        
+      } 
+      this.totalconiva=this.totaliva+this.totalventa;
+     
     }
+    
   }
+
+  enviar(){
+    this.objetohttp.post<any>(this.urlapiventas,
+    {
+      codigoventa: this.consecutivo,
+      cedulacliente: this.cedulacliente,
+      detalleventa:[
+        {
+          cantidadproducto:this.cantidad,
+          codigoproducto:this.codigoproducto,
+          valortotal:this.valortotalproducto,
+          valorventa:this.precioventa,
+          valoriva:this.ivacompra,
+        },
+        {
+          cantidadproducto:this.cantidad2,
+          codigoproducto:this.codigoproducto2,
+          valortotal:this.valortotalproducto2,
+          valorventa:this.precioventa2,
+          valoriva:this.ivacompra2,
+        },
+        {
+          cantidadproducto:this.cantidad3,
+          codigoproducto:this.codigoproducto3,
+          valortotal:this.valortotalproducto3,
+          valorventa:this.precioventa3,
+          valoriva:this. ivacompra3,
+        }
+      ],
+      ivaventa:this.totaliva,
+      totalventa: this.totalventa,
+      valorventa: this.totalconiva
+    },
+    {
+      observe: 'response'
+    },
+    ).subscribe(response => {
+        this.codigoRespuesta = response.status;
+        this.res2 = response;                
+        if (this.codigoRespuesta >= 201 && this.codigoRespuesta < 400) {
+          this.correcto = 1
+          this.toastrServ.success('Cliente registrado con exito');
+        } else {
+          this.toastrServ.error('Error en la creación de cliente');
+          this.correcto = 2
+        }
+      });
+  }
+
+
+  
 
 }

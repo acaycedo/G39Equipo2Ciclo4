@@ -41,7 +41,7 @@
                                 </div>
                             </div>
                             <div class="col-3">
-                                <button type="button" class="btn btn-primary" (click)="buscarCliente()">Consultar <i class="fas fa-arrow-right"></i></button>
+                                <button type="button" class="btn btn-primary" (click)="buscarCliente()" (click)="buscarVentas()">Consultar <i class="fas fa-arrow-right"></i></button>
                             </div>
                             <div class="col-3">
                                 <div class="form-floating mb-3">
@@ -52,7 +52,7 @@
                             </div>
                             <div class="col-3">
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="floatingInput" placeholder="cedula"
+                                    <input type="text" class="form-control" [(ngModel)]="consecutivo" placeholder="cedula"
                                         disabled="disabled">
                                     <label for="floatingInput"> Consecutivo</label>
                                 </div>
@@ -142,6 +142,7 @@
                         <div class="d-flex flex-wrap">
                             <div class="col" style="text-align: right;">
                                 <button class="btn btn-primary" type="submit" (click)="confirmar()">Confirmar</button>
+                                <button class="btn btn-primary" type="submit" (click)="enviar()">enviar</button>
                             </div>
                             <div class="col-1"></div>
                             <div class="col-3">
