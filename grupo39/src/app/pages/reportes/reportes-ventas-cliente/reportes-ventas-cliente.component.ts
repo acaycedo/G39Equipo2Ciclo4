@@ -85,6 +85,8 @@ export class ReportesVentasClienteComponent implements OnInit {
   funcion_x() {
     /* ------------------------------------------------------------------------ */
     /* TOTALIZACIÓN DE VENTA POR CLIENTE */
+    this.total_ventas_tienda = 0.00;
+    
     for (let i = 0; i < this.contenido2.length; i++) {
       const element = this.contenido2[i];
       console.log(element.cedulacliente);
@@ -94,7 +96,7 @@ export class ReportesVentasClienteComponent implements OnInit {
       console.log(element.nombrecompleto);
       console.log(element.telefono);
       element.valor_total_ventas = 0.00;
-
+      
 
       for (let i = 0; i < this.contenido.length; i++) {
         const element2 = this.contenido[i];
@@ -105,6 +107,7 @@ export class ReportesVentasClienteComponent implements OnInit {
       element.valor_total_ventas = element.valor_total_ventas.toFixed(2);
       console.log(element.valor_total_ventas);
       this.total_ventas_tienda = this.total_ventas_tienda + parseFloat(element.valor_total_ventas);
+      this.total_ventas_tienda.toFixed(2);
     }
     /* ------------------------------------------------------------------------ */
     /* CRUCE DE CLIENTE Y VENTAS DESAGRUPADAS 1er NIVEL */
