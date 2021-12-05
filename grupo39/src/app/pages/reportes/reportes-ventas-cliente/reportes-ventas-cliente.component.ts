@@ -28,6 +28,7 @@ export class ReportesVentasClienteComponent implements OnInit {
 
   //variables
   activate:number = 0;
+  total_ventas_tienda:number = 0.00;
 
   //url api get
   /* urlapiGET: string = "http://universities.hipolabs.com/search?name=middle"; */
@@ -103,6 +104,7 @@ export class ReportesVentasClienteComponent implements OnInit {
       }
       element.valor_total_ventas = element.valor_total_ventas.toFixed(2);
       console.log(element.valor_total_ventas);
+      this.total_ventas_tienda = this.total_ventas_tienda + parseFloat(element.valor_total_ventas);
     }
     /* ------------------------------------------------------------------------ */
     /* CRUCE DE CLIENTE Y VENTAS DESAGRUPADAS 1er NIVEL */
