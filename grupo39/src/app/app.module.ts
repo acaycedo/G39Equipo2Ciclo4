@@ -21,6 +21,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { VentasComponent } from './pages/ventas/ventas.component';
 import { ReportesComponent } from './pages/reportes/reportes.component';
+import { ReportesListaClientesComponent } from './pages/reportes/reportes-lista-clientes/reportes-lista-clientes.component';
+import { ReportesVentasClienteComponent } from './pages/reportes/reportes-ventas-cliente/reportes-ventas-cliente.component';
 
 
 
@@ -37,7 +39,9 @@ import { ReportesComponent } from './pages/reportes/reportes.component';
     UsuariosComponent,
     CrearClienteComponent,
     VentasComponent,
-    ReportesComponent
+    ReportesComponent,
+    ReportesListaClientesComponent,
+    ReportesVentasClienteComponent
   ],
   imports: [
     BrowserModule,

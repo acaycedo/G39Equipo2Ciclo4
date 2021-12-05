@@ -1,0 +1,114 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+<div class="container-fluid">
+  <div class="row">
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Reporte Ventas Cliente</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group me-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary"
+              (click)="mostrar_desagrupado()">Share</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" (click)="funcion_x()">Export</button>
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar"></span>
+            This week
+          </button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          Estos son los reportes disponibles para el módulo reportes.
+          <div class="col-md-auto text-center">
+            <div class="btn-group col-md-4" role="group" aria-label="Basic example">
+              <button class="btn btn-outline-success" [routerLink]="['/reportes_lista_clientes']"> Listado de Clientes
+              </button>
+            </div>
+            <div class="btn-group col-md-1" role="group" aria-label="Basic example">
+
+            </div>
+            <div class="btn-group col-md-4" role="group" aria-label="Basic example">
+              <button class="btn btn-outline-success" [routerLink]="['/reportes_ventas_cliente']"> Ventas por Cliente
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="card">
+        <div class="card-header">
+          <div class="col-lg-12 text-center">
+            <h1 class="h3">Ventas por Cliente
+              <button class="btn btn-success" (click)="mostrar_desagrupado()">
+                <i *ngIf="activate==0" _ngcontent-rei-c66="" class="fas fa-angle-down"></i>
+                <i *ngIf="activate==1" _ngcontent-rei-c66="" class="fas fa-angle-up"></i>
+                
+              </button>
+
+            </h1>
+
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="compact nowrap table table-dark table-hover table-striped" datatable [dtOptions]="dtOptions"
+              [dtTrigger]="dtTrigger">
+              <thead>
+                <tr>
+                  <th>Cédula</th>
+                  <th>Nombre</th>
+                  <th>Valor Total Ventas</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let venta of contenido2" class="">
+                  <td>{{venta.cedulacliente}}</td>
+                  <td>{{venta.nombrecompleto}}</td>
+                  <td>$ {{venta.valor_total_ventas}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div *ngIf="activate==1" class="card">
+        <div class="card-header">
+          <div class="col-lg-12 text-center">
+            <h1 class="h3">Ventas por Cliente Desagrupado</h1>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="compact nowrap table table-dark table-hover table-striped" datatable [dtOptions]="dtOptions"
+              [dtTrigger]="dtTrigger">
+              <thead>
+                <tr>
+                  <th>Cédula</th>
+                  <th>Nombre</th>
+                  <th>Venta</th>
+                  <th>Iva</th>
+                  <th>Total Venta</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let venta of contenido" class="">
+                  <td>{{venta.cedulacliente}}</td>
+                  <td>{{venta.nombrecompleto}}</td>
+                  <td>$ {{venta.totalventa}}</td>
+                  <td>$ {{venta.ivaventa}}</td>
+                  <td>$ {{venta.valorventa}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <br>
+    </main>
+  </div>
+</div>
+<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>

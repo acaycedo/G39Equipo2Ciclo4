@@ -13,6 +13,8 @@ export class SidebarComponent implements OnInit {
   productos = '';
   clientes = '';
   usuarios = '';
+  ventas = '';
+  reportes = '';
   url_actual = this.router.url
 
   ngOnInit(): void {
@@ -26,7 +28,14 @@ export class SidebarComponent implements OnInit {
     if (this.url_actual === "/usuarios") {
       this.usuarios = 'active';
     }
-
+    if (this.url_actual === "/ventas") {
+      this.ventas = 'active';
+    }
+    if (this.url_actual === "/reportes" || this.url_actual === "/reportes_lista_clientes" || this.url_actual === "/reportes_ventas_cliente") {
+      this.reportes = 'active';
+    }
+    
+    
   }
 
 

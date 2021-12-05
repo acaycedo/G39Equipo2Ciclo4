@@ -8,6 +8,9 @@ import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { CrearClienteComponent } from './pages/clientes/crear-cliente/crear-cliente.component';
 import { VentasComponent } from './pages/ventas/ventas.component';
 import { ReportesComponent } from './pages/reportes/reportes.component';
+import { ReportesListaClientesComponent } from './pages/reportes/reportes-lista-clientes/reportes-lista-clientes.component';
+import { ReportesVentasClienteComponent } from './pages/reportes/reportes-ventas-cliente/reportes-ventas-cliente.component';
+
 const routes: Routes = [
   {path:'productos',component: ProductosComponent},
   {path:'dasboard',component: DashboardComponent},
@@ -19,7 +22,10 @@ const routes: Routes = [
   {path:'usuarios', component:UsuariosComponent},
   {path:'', component:DashboardComponent},
   {path:'ventas', component:VentasComponent},
-  {path:'reportes', component:ReportesComponent}
+
+  {path:'reportes', component:ReportesComponent},
+  {path:'reportes_lista_clientes', component:ReportesListaClientesComponent},
+  {path:'reportes_ventas_cliente', component:ReportesVentasClienteComponent}
 ]
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
