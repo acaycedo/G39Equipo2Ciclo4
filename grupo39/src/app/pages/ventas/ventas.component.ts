@@ -266,7 +266,12 @@ export class VentasComponent implements OnInit {
   valoriva1: number = 0;
   valoriva2: number = 0;
   valoriva3: number = 0;
-  detalleventa=Array();
+  detalleventa = Array();
+  map:{[
+    key:string]:any;}={}
+    
+    
+  
 
   urlapiventas: string = "http://localhost:8080/api/ventas";
 
@@ -300,51 +305,46 @@ export class VentasComponent implements OnInit {
 
   confirmObjects() {
     if (this.cantidad != 0) {
-      this.objetohttp.post<any>(this.urlapiventas,
-        {
-          detalleventa: [
+      this.detalleventa.push(
             {
-              cantidadproducto: this.cantidad,
-              codigoproducto: this.codigoproducto,
-              valortotal: this.valortotalproducto,
-              valorventa: this.precioventa,
-              valoriva: this.ivacompra,
+              "cantidadproducto": this.cantidad,
+              "codigoproducto": this.codigoproducto,
+              "valortotal": this.valortotalproducto,
+              "valorventa": this.precioventa,
+              "valoriva": this.ivacompra,
             },
-          ]
-        });
+        );
+        
       if (this.cantidad2 != 0) {
-        this.objetohttp.post<any>(this.urlapiventas,
+        this.detalleventa.push(
           {
-            detalleventa: [
-              {
-                "cantidadproducto": this.cantidad2,
-                "codigoproducto": this.codigoproducto2,
-                "valortotal": this.valortotalproducto2,
-                "valorventa": this.precioventa2,
-                "valoriva": this.ivacompra2,
-              },
-            ]
-          });
+            "cantidadproducto": this.cantidad2,
+            "codigoproducto": this.codigoproducto2,
+            "valortotal": this.valortotalproducto2,
+            "valorventa": this.precioventa2,
+            "valoriva": this.ivacompra2,
+          },
+          );
         if (this.cantidad3 != 0) {
-          this.objetohttp.post<any>(this.urlapiventas,
-            {
-              detalleventa: [
-                {
-                  "cantidadproducto": this.cantidad3,
-                  "codigoproducto": this.codigoproducto3,
-                  "valortotal": this.valortotalproducto3,
-                  "valorventa": this.precioventa3,
-                  "valoriva": this.ivacompra3,
-                }
-              ]
-            },
-          )
-        }
+          this.detalleventa.push(
+          {
+            "cantidadproducto": this.cantidad2,
+            "codigoproducto": this.codigoproducto2,
+            "valortotal": this.valortotalproducto2,
+            "valorventa": this.precioventa2,
+            "valoriva": this.ivacompra2,
+          },
+          );
+            }
+          
+        
       }
     }
   }
 
+
   enviar() {
+
     this.confirmObjects()
     if (!this.cedulacliente || !this.nombrecliente) {
       this.toastrServ.error('Por favor ingrese el cliente');
@@ -358,7 +358,32 @@ export class VentasComponent implements OnInit {
             "cedulacliente": this.cedulacliente,
             "ivaventa": this.totaliva,
             "totalventa": this.totalventa,
-            "valorventa": this.totalconiva
+            "valorventa": this.totalconiva,
+            "detalleventa":this.detalleventa
+            /* "detalleventa": [
+              {
+                "cantidadproducto": this.cantidad,
+                "codigoproducto": this.codigoproducto,
+                "valortotal": this.valortotalproducto,
+                "valorventa": this.precioventa,
+                "valoriva": this.ivacompra,
+              },
+              {
+                "cantidadproducto": this.cantidad2,
+                "codigoproducto": this.codigoproducto2,
+                "valortotal": this.valortotalproducto2,
+                "valorventa": this.precioventa2,
+                "valoriva": this.ivacompra2,
+              },
+              {
+                "cantidadproducto": this.cantidad3,
+                "codigoproducto": this.codigoproducto3,
+                "valortotal": this.valortotalproducto3,
+                "valorventa": this.precioventa3,
+                "valoriva": this.ivacompra3,
+                }
+               */
+            
           },
           {
             observe: 'response'
