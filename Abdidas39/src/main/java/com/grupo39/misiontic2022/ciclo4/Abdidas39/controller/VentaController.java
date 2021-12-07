@@ -37,9 +37,12 @@ public class VentaController {
 		ArrayList<Venta> aux = (ArrayList<Venta>) ventaRepository.findAll();
 		long mayor = 0;
 		for (Venta v : aux) {
-			if (v.getCedulacliente() > mayor) {
-				mayor = v.getCedulacliente();
+			if (v.getCodigoventa() > mayor) {
+				mayor = v.getCodigoventa();
 			}
+		}
+		if (aux.isEmpty()) {
+			mayor=1;
 		}
 		
 			return new ResponseEntity<>(mayor, HttpStatus.OK);

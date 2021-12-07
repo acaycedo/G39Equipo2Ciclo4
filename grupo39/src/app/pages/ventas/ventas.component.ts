@@ -266,7 +266,7 @@ export class VentasComponent implements OnInit {
   valoriva1: number = 0;
   valoriva2: number = 0;
   valoriva3: number = 0;
-
+  detalleventa=Array();
 
   urlapiventas: string = "http://localhost:8080/api/ventas";
 
@@ -276,31 +276,76 @@ export class VentasComponent implements OnInit {
       this.toastrServ.error('Por favor ingrese el cliente');
 
     } else {
-     
-        this.totalventa = this.valortotalproducto + this.valortotalproducto2 + this.valortotalproducto3;
 
-        if (this.cantidad > 0) {
-          this.valoriva1 = (this.valortotalproducto * this.ivacompra) / 100;
-          this.totaliva += this.valoriva1;
-          if (this.cantidad2 > 0) {
-            this.valoriva1 = (this.valortotalproducto2 * this.ivacompra2) / 100;
-            this.totaliva += this.valoriva2;
-            if (this.cantidad3 > 0) {
-              this.valoriva1 = (this.valortotalproducto3 * this.ivacompra3) / 100;
-              this.totaliva += this.valoriva3;
+      this.totalventa = this.valortotalproducto + this.valortotalproducto2 + this.valortotalproducto3;
 
-            }
+      if (this.cantidad > 0) {
+        this.valoriva1 = (this.valortotalproducto * this.ivacompra) / 100;
+        this.totaliva += this.valoriva1;
+        if (this.cantidad2 > 0) {
+          this.valoriva2 = (this.valortotalproducto2 * this.ivacompra2) / 100;
+          this.totaliva += this.valoriva2;
+          if (this.cantidad3 > 0) {
+            this.valoriva3 = (this.valortotalproducto3 * this.ivacompra3) / 100;
+            this.totaliva += this.valoriva3;
+
           }
-
         }
-        this.totalconiva = this.totaliva + this.totalventa;
 
-      
+      }
+      this.totalconiva = this.totaliva + this.totalventa;
     }
 
   }
 
+  confirmObjects() {
+    if (this.cantidad != 0) {
+      this.objetohttp.post<any>(this.urlapiventas,
+        {
+          detalleventa: [
+            {
+              cantidadproducto: this.cantidad,
+              codigoproducto: this.codigoproducto,
+              valortotal: this.valortotalproducto,
+              valorventa: this.precioventa,
+              valoriva: this.ivacompra,
+            },
+          ]
+        });
+      if (this.cantidad2 != 0) {
+        this.objetohttp.post<any>(this.urlapiventas,
+          {
+            detalleventa: [
+              {
+                "cantidadproducto": this.cantidad2,
+                "codigoproducto": this.codigoproducto2,
+                "valortotal": this.valortotalproducto2,
+                "valorventa": this.precioventa2,
+                "valoriva": this.ivacompra2,
+              },
+            ]
+          });
+        if (this.cantidad3 != 0) {
+          this.objetohttp.post<any>(this.urlapiventas,
+            {
+              detalleventa: [
+                {
+                  "cantidadproducto": this.cantidad3,
+                  "codigoproducto": this.codigoproducto3,
+                  "valortotal": this.valortotalproducto3,
+                  "valorventa": this.precioventa3,
+                  "valoriva": this.ivacompra3,
+                }
+              ]
+            },
+          )
+        }
+      }
+    }
+  }
+
   enviar() {
+    this.confirmObjects()
     if (!this.cedulacliente || !this.nombrecliente) {
       this.toastrServ.error('Por favor ingrese el cliente');
     } else {
@@ -309,34 +354,11 @@ export class VentasComponent implements OnInit {
       } else {
         this.objetohttp.post<any>(this.urlapiventas,
           {
-            codigoventa: this.consecutivo,
-            cedulacliente: this.cedulacliente,
-            detalleventa: [
-              {
-                cantidadproducto: this.cantidad,
-                codigoproducto: this.codigoproducto,
-                valortotal: this.valortotalproducto,
-                valorventa: this.precioventa,
-                valoriva: this.ivacompra,
-              },
-              {
-                cantidadproducto: this.cantidad2,
-                codigoproducto: this.codigoproducto2,
-                valortotal: this.valortotalproducto2,
-                valorventa: this.precioventa2,
-                valoriva: this.ivacompra2,
-              },
-              {
-                cantidadproducto: this.cantidad3,
-                codigoproducto: this.codigoproducto3,
-                valortotal: this.valortotalproducto3,
-                valorventa: this.precioventa3,
-                valoriva: this.ivacompra3,
-              }
-            ],
-            ivaventa: this.totaliva,
-            totalventa: this.totalventa,
-            valorventa: this.totalconiva
+            "codigoventa": this.consecutivo,
+            "cedulacliente": this.cedulacliente,
+            "ivaventa": this.totaliva,
+            "totalventa": this.totalventa,
+            "valorventa": this.totalconiva
           },
           {
             observe: 'response'
